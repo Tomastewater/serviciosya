@@ -43,7 +43,7 @@ LOCAL_APPS = [
     'apps.calificacion',
     'apps.categoria',
     'apps.contrato',
-    'apps.factura',
+    'apps.facturacion',
     'apps.pago',
     'apps.prestador',
     'apps.servicio',
