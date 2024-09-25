@@ -42,13 +42,10 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     'apps.calificacion',
     'apps.categoria',
-    'apps.consumidor',
     'apps.contrato',
     'apps.factura',
     'apps.pago',
     'apps.prestador',
-    'apps.prestador_servicio',
-    'apps.rol',
     'apps.servicio',
     'apps.ubicacion',
     'apps.usuario',
