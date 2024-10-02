@@ -1,4 +1,5 @@
 from django.db import models
+from contrato.models import Contrato 
 
 class MetodoPago(models.Model):
     nombre = models.CharField(max_length=100)
@@ -16,6 +17,7 @@ class Estado(models.Model):
     
 
 class Pago(models.Model):
+    contrato = models.ForeignKey(Contrato, on_delete=models.CASCADE)
     fecha_pago = models.DateField()
     monto_pago = models.DecimalField(max_digits=15, decimal_places=2)
     metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.CASCADE)
@@ -23,4 +25,4 @@ class Pago(models.Model):
     detalles = models.TextField(max_length=1000)
     
     def __str__(self) -> str:
-        return f"Fecha del pago: {self.fechaPago} \nMonto pagado: {self.montoPago} \nMetodo de pago: {self.metodoPago.nombre} \nEstado del pago: {self.estado.nombre} \nDetalles del pago: {self.detalles}"
+        return f"Contrato: {self.contrato.id} \nFecha del pago: {self.fecha_pago} \nMonto pagado: {self.monto_pago} \nMetodo de pago: {self.metodo_pago.nombre} \nEstado del pago: {self.estado.nombre} \nDetalles del pago: {self.detalles}"
