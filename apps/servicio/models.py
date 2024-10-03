@@ -1,6 +1,4 @@
 from django.db import models
-from prestador.models import Prestador
-from ubicacion.models import Barrio
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=200)
@@ -18,8 +16,8 @@ class Servicio(models.Model):
         return f"Nombre servicio: {self.nombre} \nDescripcion: {self.descripcion}"
 
 class ServicioPrestado(models.Model):
-    prestador = models.ForeignKey(Prestador, on_delete=models.CASCADE)
-    barrio = models.ForeignKey(Barrio, on_delete=models.CASCADE)
+    prestador = models.ForeignKey("prestador.Prestador", on_delete=models.CASCADE)
+    barrio = models.ForeignKey("ubicacion.Barrio", on_delete=models.CASCADE)
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
 
     def __str__(self) -> str:

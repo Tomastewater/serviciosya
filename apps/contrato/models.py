@@ -1,6 +1,4 @@
 from django.db import models
-from ubicacion.models import DireccionConsumidor
-from servicio.models import ServicioPrestado
 
 class Contrato(models.Model):
     fechaContrato = models.DateTimeField()
@@ -8,8 +6,9 @@ class Contrato(models.Model):
     precioAcordado = models.DecimalField(max_digits=20)
     estado = models.enums['En proceso', 'Cancelado', 'Completado']
     detalles = models.TextField(max_length=1000)
-    direccionConsumidor = models.ForeignKey(DireccionConsumidor, on_delete=models.CASCADE)
-    servicioPrestado = models.ForeignKey(ServicioPrestado, on_delete=models.CASCADE)
+    direccionConsumidor = models.ForeignKey("ubicacion.DireccionConsumidor", on_delete=models.CASCADE)
+    servicioPrestado = models.ForeignKey("servicio.ServicioPrestado", on_delete=models.CASCADE)
+    factura = models.ForeignKey("facturacion.Factura", on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f"""
