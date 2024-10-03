@@ -1,5 +1,4 @@
 from django.db import models
-from contrato.models import Contrato 
 
 class MetodoPago(models.Model):
     nombre = models.CharField(max_length=100)
@@ -17,7 +16,7 @@ class Estado(models.Model):
     
 
 class Pago(models.Model):
-    contrato = models.ForeignKey(Contrato, on_delete=models.CASCADE)
+    contrato = models.ForeignKey("contrato.Contrato", on_delete=models.CASCADE)
     fecha_pago = models.DateField()
     monto_pago = models.DecimalField(max_digits=15, decimal_places=2)
     metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.CASCADE)

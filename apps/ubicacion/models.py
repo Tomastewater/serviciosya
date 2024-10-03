@@ -1,5 +1,4 @@
 from django.db import models
-from usuario.models import Consumidor
 
 class Provincia(models.Model):
     nombre = models.CharField(max_length=100)
@@ -25,7 +24,7 @@ class Direccion(models.Model):
     calle = models.TextField(max_length=200)
     altura = models.TextField(max_length=200)
     departamento = models.CharField(max_length=100, null=True, default='N/A')
-    codigoPostal = models.CharField(max_length=100)
+    codigo_postal = models.CharField(max_length=100)
     barrio = models.ForeignKey(Barrio, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -35,4 +34,4 @@ class Direccion(models.Model):
     
 class DireccionConsumidor(models.Model):
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
-    consumidor = models.ForeignKey(Consumidor, on_delete=models.CASCADE)
+    consumidor = models.ForeignKey("consumidor.Consumidor", on_delete=models.CASCADE)

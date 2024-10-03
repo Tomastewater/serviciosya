@@ -2,7 +2,12 @@ from django.db import models
 from django.contrib.auth.hashers import make_password
 
 class Usuario(models.Model):
-    rol = models.enums["Consumidor", "Prestador"]
+    ROLES = [
+        (1,'Quiero contratar un servicio'),
+        (2,'Quiero prestar servicio')
+    ]
+
+    rol = models.IntegerField(choices=ROLES)
     nombre = models.CharField(max_length=150)
     apellido = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
