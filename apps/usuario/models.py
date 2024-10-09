@@ -10,13 +10,14 @@ class Usuario(models.Model):
     rol = models.IntegerField(choices=ROLES)
     nombre = models.CharField(max_length=150)
     apellido = models.CharField(max_length=150)
+    dni = models.CharField(max_length=10, default="0000000000")
     email = models.EmailField(unique=True)
     contraseña = models.CharField(max_length=128)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     
 
     def __str__(self):
-        return f"{self.nombre} {self.apellido} ({self.email})"
+        return f"{self.nombre} {self.apellido} {self.dni}"
     
     def set_password(self, password):
         """

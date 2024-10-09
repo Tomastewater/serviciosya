@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from apps.prestador.models import Prestador
+@admin.register(Prestador)
+class PrestadorAdmin(admin.ModelAdmin):
+    list_display = ["id", "usuario", "codFiscal"]

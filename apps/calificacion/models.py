@@ -10,9 +10,9 @@ class Calificacion(models.Model):
     ]
 
     fecha_calificacion = models.DateField()
-    Calificacion = models.IntegerField(choices=CALIFICACION_OPCIONES)
+    calificacion = models.IntegerField(choices=CALIFICACION_OPCIONES)
     comentario = models.TextField(max_length=1000)
 
     def __str__(self):
-        return f"Fecha de la Calificacion: {self.fecha_calificacion} \nCalificacion: {self.Calificacion}/5 \nComentario: {self.comentario}"
+        return f"Fecha de la Calificacion: {self.fecha_calificacion} \nCalificacion: {self.Calificacion}"
     
