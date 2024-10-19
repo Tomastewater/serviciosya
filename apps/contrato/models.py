@@ -14,16 +14,18 @@ class Contrato(models.Model):
     detalles = models.TextField(max_length=1000)
     direccion_consumidor = models.ForeignKey("ubicacion.DireccionConsumidor", on_delete=models.CASCADE)
     servicio_prestado = models.ForeignKey("servicio.ServicioPrestado", on_delete=models.CASCADE)
-    factura = models.ForeignKey("facturacion.Factura", on_delete=models.CASCADE)
+    factura = models.ForeignKey("facturacion.Factura", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self) -> str:
-        return f"""
+        return f"Fecha: {self.fecha_contrato} / {self.servicio_prestado} / {self.estado} / {self.detalles}"
+
+
+"""
         Fecha Contratacion: {self.fecha_contrato}
         Fecha Servicio: {self.fecha_servicio}
         Servicio Prestado: {self.servicio_prestado.servicio.nombre}
-        Direccion del consumidor: {self.direccion_consumidor.direccion}
+        Direccion del consumidor: {self.direccion_consumidor.direccion.barrio}, {self.direccion_consumidor.direccion.calle}, {self.direccion_consumidor.direccion.altura}
         Precio acordado por el servicioL: {self.precio_acordado}
         Estado del contrato: {self.estado}
         Detalles: {self.detalles}
         """
-

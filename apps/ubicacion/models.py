@@ -18,7 +18,7 @@ class Barrio(models.Model):
     localidad = models.ForeignKey(Localidad, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'Barrio: {self.nombre}'
+        return f'{self.nombre}'
 
 class Direccion(models.Model):
     calle = models.TextField(max_length=200)
@@ -35,3 +35,6 @@ class Direccion(models.Model):
 class DireccionConsumidor(models.Model):
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
     consumidor = models.ForeignKey("consumidor.Consumidor", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.direccion.barrio}, {self.direccion.calle}, {self.direccion.altura}"

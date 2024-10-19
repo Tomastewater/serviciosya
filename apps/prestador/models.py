@@ -5,8 +5,9 @@ class Prestador(models.Model):
 
     estudios = models.TextField(max_length=500)
     codFiscal = models.CharField(max_length=100)
-    usuario = models.ForeignKey("usuario.Usuario", on_delete=models.CASCADE, null=True)
+    usuario = models.ForeignKey("usuario.Usuario", on_delete=models.CASCADE, null=True, blank=True)
 
-    def __set__(self):
-        return f"Nombre Prestador: {self.usuario.nombre} \nCodigo Fiscal: {self.codFiscal}"
+    def __str__(self):
+        return f"{self.usuario.nombre} {self.usuario.apellido} / Codigo Fiscal: {self.codFiscal}"
     
+        

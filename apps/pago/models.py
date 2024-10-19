@@ -5,14 +5,14 @@ class MetodoPago(models.Model):
     detalle = models.TextField(max_length=500)
 
     def __str__(self) -> str:
-        return f"Metodo de pago: {self.nombre} \nDetalle: {self.detalle}"
+        return f"{self.nombre}"
     
 class Estado(models.Model):
     nombre = models.CharField(max_length=100)
     detalle = models.TextField(max_length=500)
 
     def __str__(self):
-        return f"Estado del pago: {self.nombre} \nDetalles: {self.detalle}"
+        return f"{self.nombre}"
     
 
 class Pago(models.Model):

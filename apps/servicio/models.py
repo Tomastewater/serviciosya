@@ -21,5 +21,5 @@ class ServicioPrestado(models.Model):
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return f'Servicio prestado: {self.servicio.nombre}'
+        return f'Servicio prestado: {self.servicio.nombre} \nPrestador: {self.prestador.usuario.nombre}'
 

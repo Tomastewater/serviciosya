@@ -16,7 +16,7 @@ class Usuario(models.Model):
     
 
     def __str__(self):
-        return f"{self.nombre} {self.apellido} ({self.email})"
+        return f"Nombre: {self.nombre} \nApellido: {self.apellido} \nCorreo: {self.email}"
     
     def set_password(self, password):
         """
