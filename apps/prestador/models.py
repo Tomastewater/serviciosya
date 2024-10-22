@@ -8,6 +8,7 @@ class Prestador(models.Model):
     usuario = models.ForeignKey("usuario.Usuario", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.usuario.nombre} {self.usuario.apellido} / Codigo Fiscal: {self.codFiscal}"
+        nombre_completo = f"{self.usuario.nombre} {self.usuario.apellido}"
+        return f"{nombre_completo} | Código Fiscal: {self.codFiscal}"
     
         

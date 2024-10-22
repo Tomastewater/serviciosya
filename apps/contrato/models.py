@@ -17,7 +17,8 @@ class Contrato(models.Model):
     factura = models.ForeignKey("facturacion.Factura", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self) -> str:
-        return f"Fecha: {self.fecha_contrato} / {self.servicio_prestado} / {self.estado} / {self.detalles}"
+        direccion = self.direccion_consumidor.direccion
+        return f"Contrato #{self.id} | Fecha: {self.fecha_contrato.strftime('%d/%m/%Y %H:%M')} | {self.servicio_prestado.servicio.nombre} | Dirección {direccion.barrio}, {direccion.calle} {direccion.altura} | Precio: ${self.precio_acordado} | Estado: {self.estado}"
 
 
 """

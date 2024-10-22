@@ -7,4 +7,5 @@ class Factura(models.Model):
     detalles = models.TextField(max_length=500)
 
     def __str__(self) -> str:
-        return f"Fecha Emision: {self.fecha_emision} \nDetalles: {self.detalles} \nMonto del contrato: {self.monto_total} \nImpuestos: {self.impuestos} \n\nTotal + impuestos: {self.impuestos + self.monto_total}"
+        total_con_impuestos = self.monto_total + self.impuestos
+        return f"Fecha: {self.fecha_emision} | Monto: ${self.monto_total} | Impuestos: ${self.impuestos} | Total (con impuestos): ${total_con_impuestos}"

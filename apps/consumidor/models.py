@@ -10,5 +10,5 @@ class Consumidor(models.Model):
         Si el consumidor no tiene un usuario asociado, devuelve un mensaje indicando que no hay usuario asociado.
         """
         if self.usuario:
-            return f'Nombre Consumidor: {self.usuario.nombre} {self.usuario.apellido}'
+            return f'{self.usuario.nombre} {self.usuario.apellido}'
         return 'Consumidor sin usuario asociado'
