@@ -17,9 +17,9 @@ class Servicio(models.Model):
 
 class ServicioPrestado(models.Model):
     prestador = models.ForeignKey("prestador.Prestador", on_delete=models.CASCADE)
-    barrio = models.ForeignKey("ubicacion.Barrio", on_delete=models.CASCADE)
+    localidad = models.ForeignKey("ubicacion.Localidad", on_delete=models.CASCADE, default=None)
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return f'{self.servicio.nombre} - Prestado por: {self.prestador.usuario.nombre} {self.prestador.usuario.apellido} en {self.barrio}'
+        return f'{self.servicio.nombre} - Prestado por: {self.prestador.usuario.nombre} {self.prestador.usuario.apellido} en {self.localidad}'
 

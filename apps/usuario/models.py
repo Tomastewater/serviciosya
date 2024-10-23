@@ -1,13 +1,19 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
 
-class Usuario(models.Model):
+class Rol(models.Model):
     ROLES = [
         (1,'Quiero contratar un servicio'),
         (2,'Quiero prestar servicio')
     ]
 
     rol = models.IntegerField(choices=ROLES)
+    usuario = models.ForeignKey("usuario.Usuario", on_delete=models.CASCADE, related_name="rols") 
+
+
+
+class Usuario(models.Model):
+    
     nombre = models.CharField(max_length=150)
     apellido = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
@@ -18,10 +24,4 @@ class Usuario(models.Model):
     def __str__(self):
         return f"Nombre: {self.nombre} | Apellido: {self.apellido} | Correo: {self.email}"
     
-    def set_password(self, password):
-        """
-        Cifra la contraseña y la guarda en el campo `contraseña`.
-        """
-        self.contraseña = make_password(password)
-        self.save()
 

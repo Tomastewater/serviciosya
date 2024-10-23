@@ -14,4 +14,4 @@ class ServicioAdmin(admin.ModelAdmin):
 from apps.servicio.models import ServicioPrestado
 @admin.register(ServicioPrestado)
 class ServicioPrestadoAdmin(admin.ModelAdmin):
-    list_display = ["prestador", "servicio", "barrio"]
+    list_display = ["prestador", "servicio", "localidad"]
