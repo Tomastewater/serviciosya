@@ -25,3 +25,4 @@ class Usuario(models.Model):
         return f"Nombre: {self.nombre} | Apellido: {self.apellido} | Correo: {self.email}"
     
 
+"ATOMICS TRANSACTIONS"
