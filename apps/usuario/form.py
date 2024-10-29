@@ -1,12 +1,12 @@
 from django import forms
 from .models import Usuario
 
-class usuarioForm(forms.ModelForm):
+class usuarioForm(forms.Form):
     nombre = forms.CharField(max_length=150)
     apellido = forms.CharField(max_length=150)
-    email = forms.EmailField(unique=True)
+    email = forms.EmailField(required=True)
     contraseña = forms.CharField(max_length=128)
-    fecha_creacion = forms.DateTimeField(auto_now_add=True)
+    fecha_creacion = forms.DateTimeField()
 
     def save(self):
         Usuario.objects.create(
