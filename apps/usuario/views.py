@@ -1,6 +1,7 @@
 from django.views import generic
 from .form import usuarioForm
 from django.urls import reverse_lazy
+from django.shortcuts import render
 
 class usuarioFormView(generic.FormView):
     template_name = 'agregarUsuario.html'
@@ -12,4 +13,5 @@ class usuarioFormView(generic.FormView):
         return super().form_valid(form)
     
 
-
+def home(request):
+    return render(request, 'home.html')
