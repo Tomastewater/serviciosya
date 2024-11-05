@@ -11,7 +11,11 @@ class usuarioFormView(generic.FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-    
+
+  
 
 def home(request):
     return render(request, 'home.html')
+
+def about(request):
+    return render(request, 'about.html')
