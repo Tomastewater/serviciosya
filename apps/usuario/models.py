@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.hashers import make_password
 
 class Rol(models.Model):
     ROLES = [
@@ -8,7 +7,11 @@ class Rol(models.Model):
     ]
 
     rol = models.IntegerField(choices=ROLES)
-    usuario = models.ForeignKey("usuario.Usuario", on_delete=models.CASCADE, related_name="rols") 
+    usuario = models.ForeignKey("usuario.Usuario", on_delete=models.CASCADE, related_name="rols")
+
+    def __str__(self):
+        rol_nombre = 'consumidor' if self.rol == 1 else 'prestador'
+        return f"Nombre: {self.usuario.nombre}, Rol: {rol_nombre}"
 
 
 
