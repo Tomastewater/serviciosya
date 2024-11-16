@@ -4,9 +4,9 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 
 class usuarioFormView(generic.FormView):
-    template_name = 'agregarUsuario.html'
+    template_name = 'formRegistrarse.html'
     form_class = usuarioForm
-    success_url = reverse_lazy('add_user')
+    success_url = reverse_lazy('register')
 
     def form_valid(self, form):
         form.save()
@@ -14,8 +14,8 @@ class usuarioFormView(generic.FormView):
 
   
 
-def home(request):
-    return render(request, 'home.html')
+class homeView(generic.TemplateView):
+    template_name = 'home.html'
 
-def about(request):
-    return render(request, 'about.html')
+class aboutView(generic.TemplateView):
+    template_name = 'about.html'
