@@ -20,3 +20,6 @@ class homeView(generic.TemplateView):
 
 class aboutView(generic.TemplateView):
     template_name = 'about.html'
+
+class consumidorView(generic.TemplateView):
+    template_name = 'index_consumidor.html'
