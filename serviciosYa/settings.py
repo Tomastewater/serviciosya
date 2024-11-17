@@ -50,6 +50,8 @@ LOCAL_APPS = [
     'apps.ubicacion',
     'apps.usuario',
     'apps.consumidor',
+    "crispy_forms",
+    "crispy_tailwind",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
@@ -140,3 +142,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"

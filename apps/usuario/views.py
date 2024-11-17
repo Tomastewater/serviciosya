@@ -12,7 +12,8 @@ class usuarioFormView(generic.FormView):
         form.save()
         return super().form_valid(form)
 
-  
+class registerView(generic.TemplateView):
+    template_name = 'register.html'
 
 class homeView(generic.TemplateView):
     template_name = 'home.html'
