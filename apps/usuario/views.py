@@ -17,7 +17,7 @@ class usuarioFormView(generic.FormView):
         return super().form_valid(form)
     
 class ubicacionFormView(generic.FormView):
-    template_name = 'formUbicacion'
+    template_name = 'formUbicacion.html'
     form_class = direccionForm
     success_url = reverse_lazy('oneDirection')
 
