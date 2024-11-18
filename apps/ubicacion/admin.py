@@ -14,5 +14,5 @@ class LocalidadAdmin(admin.ModelAdmin):
 from apps.ubicacion.models import Direccion
 @admin.register(Direccion)
 class DireccionAdmin(admin.ModelAdmin):
-    list_display = ["calle", "altura", "barrio"]    
+    list_display = ["calle","altura", "departamento" , "usuario"]    
  

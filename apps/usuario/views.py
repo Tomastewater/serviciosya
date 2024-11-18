@@ -1,7 +1,11 @@
 from django.views import generic
 from .form import usuarioForm
+from apps.ubicacion.form import direccionForm
 from django.urls import reverse_lazy
 from django.shortcuts import render
+from .models import Usuario, Rol
+from apps.contrato.models import Contrato
+from apps.ubicacion.models import Direccion
 
 class usuarioFormView(generic.FormView):
     template_name = 'formRegistrarse.html'
@@ -11,6 +15,11 @@ class usuarioFormView(generic.FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+    
+class ubicacionFormView(generic.FormView):
+    template_name = 'formUbicacion'
+    form_class = direccionForm
+    success_url = reverse_lazy('oneDirection')
 
 class registerView(generic.TemplateView):
     template_name = 'register.html'
@@ -23,3 +32,18 @@ class aboutView(generic.TemplateView):
 
 class consumidorView(generic.TemplateView):
     template_name = 'index_consumidor.html'
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['contratos'] = Contrato.objects.all()
+        context['usuarios'] = Usuario.objects.all()
+        return context
+        
+class direccionView(generic.TemplateView):
+    template_name = 'directions.html'
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['direcciones'] = Direccion.objects.all()
+        context['usuarios'] = Usuario.objects.all()
+        return context

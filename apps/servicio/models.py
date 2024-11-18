@@ -9,7 +9,7 @@ class Categoria(models.Model):
 
 class Servicio(models.Model):
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField(max_length=500)
+    descripcion = models.TextField(max_length=500, null=True, blank=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -21,5 +21,5 @@ class ServicioPrestado(models.Model):
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return f'{self.servicio.nombre} - Prestado por: {self.prestador.usuario.nombre} {self.prestador.usuario.apellido} en {self.localidad}'
+        return f'{self.servicio.nombre} - Prestado por: {self.prestador.rol_usuario.usuario.nombre} {self.prestador.rol_usuario.usuario.apellido} en {self.localidad}'
 

@@ -9,7 +9,10 @@ class Rol(models.Model):
 
     rol = models.IntegerField(choices=ROLES)
     usuario = models.ForeignKey("usuario.Usuario", on_delete=models.CASCADE, related_name="rols") 
-
+    
+    def __str__(self):
+        return f'Nombre: {self.usuario.nombre} | Rol: {'Consumidor' if self.rol == 1 else 'Prestador de servicio'}'
+    
 
 
 class Usuario(models.Model):

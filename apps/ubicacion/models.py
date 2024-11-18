@@ -1,7 +1,35 @@
 from django.db import models
 
 class Provincia(models.Model):
-    nombre = models.CharField(max_length=100)
+
+    PROVINCIAS = [
+        (1, 'Buenos Aires'),
+        (2, 'Ciudad Autónoma de Buenos Aires'),
+        (3, 'Catamarca'),
+        (4, 'Chaco'),
+        (5, 'Chubut'),
+        (6, 'Córdoba'),
+        (7, 'Corrientes'),
+        (8, 'Entre Ríos'),
+        (9, 'Formosa'),
+        (10, 'Jujuy'),
+        (11, 'La Pampa'),
+        (12, 'La Rioja'),
+        (13, 'Mendoza'),
+        (14, 'Misiones'),
+        (15, 'Neuquén'),
+        (16, 'Río Negro'),
+        (17, 'Salta'),
+        (18, 'San Juan'),
+        (19, 'San Luis'),
+        (20, 'Santa Cruz'),
+        (21, 'Santa Fe'),
+        (22, 'Santiago del Estero'),
+        (23, 'Tierra del Fuego, Antártida e Islas del Atlántico Sur'),
+        (24, 'Tucumán'),
+    ]
+
+    nombre = models.IntegerField(choices=PROVINCIAS)
 
     def __str__(self):
         return f'{self.nombre}'
@@ -12,6 +40,9 @@ class Localidad(models.Model):
 
     def __str__(self):
         return f'{self.nombre}, {self.provincia}'
+    
+    def localidad_completa(self):
+        return f'| {self.nombre} | {self.provincia.nombre} |'
     
 
 class Direccion(models.Model):
@@ -29,3 +60,5 @@ class Direccion(models.Model):
         return f"""{self.calle} {self.altura}{departamento_str},
         {barrio_str}, CP: {self.codigo_postal}"""
     
+    def direccionCompleta(self):
+        return f"| Localidad: {self.localidad} | Calle: {self.calle} | Altura: {self.altura} | Departamento: {self.departamento} | "

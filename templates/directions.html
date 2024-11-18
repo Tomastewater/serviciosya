@@ -16,17 +16,20 @@
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
+
     <!-- Sidebar Start -->
-    <aside class="left-sidebar">
+    <aside class="left-sidebar w-1/6">
       <!-- Sidebar scroll-->
       <div>
-        <div class="brand-logo d-flex align-items-center justify-items-start ">
+        <div class="brand-logo d-flex align-items-center justify-items-start">
           {% comment %} <a href="#" class="text-nowrap logo-img ">
             <img src={% static "images/dash/logos/logoPanelControl.png"%} alt="logo Servicios Ya" />
           </a> {% endcomment %}
+          
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
           </div>
+          
         </div>
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav" data-simplebar="">
@@ -36,7 +39,7 @@
               <h1 class='text-2xl font-medium'>INCIO</h1>
             </div>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="#" aria-expanded="false">
+              <a class="sidebar-link" href="../" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -52,7 +55,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="direcciones/" aria-expanded="false">
+              <a class="sidebar-link" href="#" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:planet-3-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -90,9 +93,9 @@
         </nav>
         <!-- End Sidebar navigation -->
       </div>
-      <!-- End Sidebar scroll-->
     </aside>
     <!--  Sidebar End -->
+
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
@@ -133,52 +136,65 @@
         </nav>
       </header>
       <!--  Header End -->
+
       <div class="container-fluid">
-        
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title fs-6 font-semibold">Contratos</h5>
-              <div class="table-responsive">
-                <table class="table text-nowrap align-middle mb-0">
-                  <thead>
-                    <tr class="border-2 border-bottom border-primary border-0"> 
-                      <th scope="col" class="ps-2 text-center">Ver mas</th>
-                      <th scope="col" class="ps-4">Fecha del servicio</th>
-                      <th scope="col" class="text-center">Servicio prestado</th>
-                      <th scope="col" class="text-center">Direccion</th>
-                      <th scope="col" class="text-center">Detalles</th>
-                      <th scope="col" class="text-center">Estado</th>
-                      <th scope="col" class="text-center">Precio</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-group-divider">
-                    {% for contrato in contratos %}
-                      <tr>
-                        <td class="text-center fw-medium">
-                          <button type="button" class="flex justify-center items-center text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full px-3 py-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                              <img src="{% static 'images/dash/logos/file-search.svg' %}" alt="Ícono" class="w-6 h-6">
-                          </button>
-                        </td>
-                        <td class="text-center fw-medium">{{contrato.fecha_servicio}}</td>
-                        <td class="text-center fw-medium">{{contrato.servicio_prestado.servicio.nombre}}</td>
-                        <td class="text-center fw-medium">{{contrato.direccion.direccionCompleta}}</td>
-                        <td class="text-center fw-medium">{{contrato.detalles}}</td>
-                        <td class="text-center fw-medium">{{contrato.estado}}</td>
-                        <td class="text-center fw-medium">AR$ {{contrato.precio_acordado}}</td>
-                        {% comment %} <td>
-                          <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/index.html</a>
-                        </td> {% endcomment %}
-                        
+        <div class='row'>
+          <div class="col-lg-7 pl-1">
+            <div class="card ">
+              <div class="card-body ">
+                <h5 class="card-title fs-6 font-semibold">Mis Direcciones</h5>
+                <div class="table-responsive">
+                  <table class="table text-nowrap align-middle mb-0">
+                    <thead>
+                      <tr class="border-2 border-bottom border-primary border-0"> 
+                        <th scope="col" class="text-center">Ver mas</th>
+                        <th scope="col" class="text-center">Calle</th>
+                        <th scope="col" class="text-center">Altura</th>
+                        <th scope="col" class="text-center">Departamento</th>
+                        <th scope="col" class="text-center">Localidad</th>
                       </tr>
-                    {% endfor %}
-                    
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody class="table-group-divider">
+                      {% for direccion in direcciones %}
+                        <tr>
+                          <td class="text-center fw-medium">
+                            <button type="button" class="flex justify-center items-center text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full px-3 py-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                <img src="{% static 'images/dash/logos/file-search.svg' %}" alt="Ícono" class="w-6 h-6">
+                            </button>
+                          </td>
+                          <td class="text-center fw-medium">{{direccion.calle}}</td>
+                          <td class="text-center fw-medium">{{direccion.altura}}</td>
+                          <td class="text-center fw-medium">{{direccion.departamento}}</td>
+                          <td class="text-center fw-medium">{{direccion.localidad.localidad_completa}}</td>
+                          <td class="text-center fw-medium">{{contrato.estado}}</td>
+                          {% comment %} <td>
+                            <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/index.html</a>
+                          </td> {% endcomment %}
+                          
+                        </tr>
+                      {% endfor %}
+                      
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
+  
+          <div class="col-lg-5">
+            <div class="card">
+              <div class="card-body">
+
+                {% block content %}
+                
+                {% endblock  %}
+
+              </div>
+            </div>
+          </div>
+
         </div>
+
       
         <div class="py-6 px-6 text-center">
           <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"

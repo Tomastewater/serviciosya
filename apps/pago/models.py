@@ -2,25 +2,23 @@ from django.db import models
 
 class MetodoPago(models.Model):
     nombre = models.CharField(max_length=100)
-    detalle = models.TextField(max_length=500)
+    detalle = models.TextField(max_length=500, null=True, blank=True)
 
     def __str__(self) -> str:
         return self.nombre
     
-class Estado(models.Model):
-    nombre = models.CharField(max_length=100)
-    detalle = models.TextField(max_length=500)
-
-    def __str__(self):
-        return self.nombre
-    
-
 class Pago(models.Model):
+    ESTADO_PAGO = [
+        (1, 'En proceso'),
+        (2, 'Cancelado'),
+        (3, 'Completado'),
+    ]
+
     contrato = models.ForeignKey("contrato.Contrato", on_delete=models.CASCADE)
     fecha_pago = models.DateField()
     monto_pago = models.DecimalField(max_digits=15, decimal_places=2)
     metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.CASCADE)
-    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
+    estado = models.IntegerField(choices=ESTADO_PAGO)
     detalles = models.TextField(max_length=1000)
     
     def __str__(self) -> str:

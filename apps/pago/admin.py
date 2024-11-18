@@ -1,17 +1,14 @@
 from django.contrib import admin
+from apps.pago.models import MetodoPago
+from apps.pago.models import Pago
 
 # Register your models here.
-from apps.pago.models import MetodoPago
+
 @admin.register(MetodoPago)
 class MetodoPagoAdmin(admin.ModelAdmin):
-    list_display = ["nombre"]
+    list_display = ["nombre"]  
 
-from apps.pago.models import Estado
-@admin.register(Estado)
-class EstadoAdmin(admin.ModelAdmin):
-    list_display = ["nombre"]   
 
-from apps.pago.models import Pago
 @admin.register(Pago)
 class PagoAdmin(admin.ModelAdmin):
     list_display = ["id", "fecha_pago", "monto_pago", "estado"]
