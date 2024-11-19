@@ -1,16 +1,15 @@
 {% extends "directions.html" %}
 {% load tailwind_filters %}
-{% load static %}
 
 {% block content %}
 
-    <div class="w-2/3 max-w-2x1 mx-auto sm:px-6 lg:px-8">
+    <div class="w-2/3 max-w-2x1 mx-auto sm:px-1 lg:px-8">
         
         {% comment %} <div class="grid justify-items-center">
             <img src={% static "images/logoServiciosya.png"%}>
         </div> {% endcomment %}
         <div class="container bg-orange-50 h-12 mb-4">
-            <h1 class="text-4xl font-bold mb-8 text-center">Agregar nueva direccion</h1>
+            <h1 class="text-1xl font-bold mb-8 text-center">Agregar nueva direccion</h1>
         </div>
         <form action = "{% url "oneDirection" %}" method="post">
 

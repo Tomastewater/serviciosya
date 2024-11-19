@@ -21,6 +21,11 @@ class ubicacionFormView(generic.FormView):
     form_class = direccionForm
     success_url = reverse_lazy('oneDirection')
 
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+    
+
 class registerView(generic.TemplateView):
     template_name = 'register.html'
 

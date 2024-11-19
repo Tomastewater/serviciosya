@@ -9,7 +9,7 @@ class direccionForm(forms.Form):
     altura = forms.IntegerField()
     departamento = forms.CharField(max_length=150, required=True)
     codigo_postal = forms.CharField(max_length=150)
-    provincia = forms.CharField(max_length=150)
+    provincia = forms.ChoiceField(choices=Provincia.PROVINCIAS, required=True)
     barrio = forms.CharField(max_length=150)
     localidad = forms.CharField(max_length=150, required=True)
 
@@ -19,10 +19,10 @@ class direccionForm(forms.Form):
         else:
 
             provincia = Provincia.objects.create(
-                provincia = self.cleaned_data['provincia']
+                nombre = int(self.cleaned_data['provincia']),
             )
             localidad = Localidad.objects.create(
-                localidad = self.cleaned_data['localidad'],
+                nombre = self.cleaned_data['localidad'],
                 provincia = provincia
             )
 
