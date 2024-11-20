@@ -7,6 +7,7 @@ from .models import Usuario, Rol
 from apps.contrato.models import Contrato
 from apps.ubicacion.models import Direccion
 from apps.facturacion.models import Factura
+from apps.prestador.models import Prestador
 
 class usuarioFormView(generic.FormView):
     template_name = 'formRegistrarse.html'
@@ -53,29 +54,52 @@ class direccionView(generic.TemplateView):
         context['direcciones'] = Direccion.objects.all()
         context['usuarios'] = Usuario.objects.all()
         return context
-    
-class prestadorView(generic.TemplateView):
+
+class PrestadorView(generic.TemplateView):
     template_name = 'index_prestador.html'
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        context['contratos'] = Contrato.objects.all()
+        context['prestador'] = Prestador.objects.get(id=3)
         context['usuarios'] = Usuario.objects.all()
         return context
 
-class facturaView(generic.TemplateView):
-    template_name = 'facturas.html'
+class PrestadorDatosView(generic.TemplateView):
+    template_name = 'prestador_datos_personales.html'
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        context['facturas'] = Factura.objects.all()
-        context['contratos'] = Contrato.objects.all()
+        context['usuarios'] = Usuario.objects.all()
+        context['prestador'] = Prestador.objects.get(id=3)
+        return context
+
+class PrestadorDireccionView(generic.TemplateView):
+    template_name = 'prestador_direcciones.html'
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['usuarios'] = Usuario.objects.all()
+        context['direcciones'] = Direccion.objects.all().filter(usuario_id=44)
+        context["prestador"] = Prestador.objects.get(id=3)
         return context 
 
-class contratoView(generic.TemplateView):
-    template_name = 'contratos.html'
+class PrestadorFacturaView(generic.TemplateView):
+    template_name = 'prestador_facturas.html'
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        context['contratos'] = Contrato.objects.all()
-        return context    
+        context['usuarios'] = Usuario.objects.all()
+        context['contratos'] = Contrato.objects.all().filter(servicio_prestado__prestador=3)
+        context["prestador"] = Prestador.objects.get(id=3)
+        context['facturas'] = Factura.objects.filter(contratos__servicio_prestado__prestador__id=3)
+        return context 
+
+class PrestadorContratoView(generic.TemplateView):
+    template_name = 'prestador_contratos.html'
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['usuarios'] = Usuario.objects.all()
+        context['contratos'] = Contrato.objects.all().filter(servicio_prestado__prestador=3)
+        context['prestador'] = Prestador.objects.get(id=3)
+        return context

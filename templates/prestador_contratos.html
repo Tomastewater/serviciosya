@@ -63,7 +63,15 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+              <a class="sidebar-link" href="direcciones/" aria-expanded="false">
+                <span>
+                  <iconify-icon icon="solar:planet-3-bold-duotone" class="fs-6"></iconify-icon>
+                </span>
+                <span class="hide-menu fs-3">Direcciones</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="datos/" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:file-text-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -133,7 +141,7 @@
           <div class="col-lg-12 pl-1">
             <div class="card ">
               <div class="card-body ">
-                <h5 class="card-title fs-6 font-semibold">Mis Contratos</h5>
+                <h5 class="card-title fs-6 font-semibold">Contratos de {{ prestador.rol_usuario.usuario.nombre }} {{ prestador.rol_usuario.usuario.apellido }}</h5>
                 <div class="table-responsive">
                   <table class="table text-nowrap align-middle mb-0">
                     <thead>

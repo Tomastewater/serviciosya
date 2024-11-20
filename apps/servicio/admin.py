@@ -4,14 +4,14 @@ from django.contrib import admin
 from apps.servicio.models import Categoria
 @admin.register(Categoria)
 class CategoriaAdmin(admin.ModelAdmin):
-    list_display = ["nombre"]
+    list_display = ["id", "nombre"]
 
 from apps.servicio.models import Servicio
 @admin.register(Servicio)
 class ServicioAdmin(admin.ModelAdmin):
-    list_display = ["nombre", "categoria"]   
+    list_display = ["id", "nombre", "categoria"]   
 
 from apps.servicio.models import ServicioPrestado
 @admin.register(ServicioPrestado)
 class ServicioPrestadoAdmin(admin.ModelAdmin):
-    list_display = ["prestador", "servicio", "localidad"]
+    list_display = ["id", "prestador", "servicio", "localidad"]
