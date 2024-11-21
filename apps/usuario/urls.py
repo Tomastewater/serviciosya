@@ -1,4 +1,4 @@
-from .views import usuarioFormView, homeView, aboutView, consumidorView, direccionView, ubicacionFormView, PrestadorDireccionView, PrestadorView, PrestadorDatosView, PrestadorContratoView, PrestadorFacturaView
+from .views import usuarioFormView, homeView, aboutView, consumidorView, direccionView, ubicacionFormView, PrestadorPanelView, PrestadorDireccionView, PrestadorView, PrestadorDatosView, PrestadorContratoView, PrestadorFacturaView
 from django.urls import path
 
 
@@ -9,6 +9,7 @@ urlpatterns = [
     path('acercade/', aboutView.as_view(), name='about'),
     path('consumidor/', consumidorView.as_view(), name='consumidor'),
     path('prestador/', PrestadorView.as_view(), name='prestador'),
+    path('prestador/panel/', PrestadorPanelView.as_view(), name='panel'),
     path('prestador/datos/', PrestadorDatosView.as_view(), name='datos'),
     path('prestador/direcciones/', PrestadorDireccionView.as_view(), name='direcciones'),
     # path('consumidor/direcciones/', direccionView.as_view(), name='oneDirection'),

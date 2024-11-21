@@ -7,8 +7,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Prestador</title>
-  <link rel="shortcut icon" type="image/png" href={% static "images/dash/logos/seodashlogo.png"%} />
-  <link rel="stylesheet" href={% static "css/dash/styles.min.css"%} />
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/dash/logos/seodashlogo.png' %}" />
+  <link rel="stylesheet" href="{% static 'css/dash/styles.min.css' %}" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -23,7 +23,7 @@
       <div>
         <div class="brand-logo d-flex align-items-center justify-items-start">
           {% comment %} <a href="#" class="text-nowrap logo-img ">
-            <img src={% static "images/dash/logos/logoPanelControl.png"%} alt="logo Servicios Ya" />
+            <img src="{% static 'images/dash/logos/logoPanelControl.png' %}" alt="logo Servicios Ya" />
           </a> {% endcomment %}
           
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -39,7 +39,7 @@
               <h1 class='text-2xl font-medium'>INICIO</h1>
             </div>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="../" aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'panel' %}" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -47,7 +47,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="contratos/" aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'contratos' %}"aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -55,7 +55,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="facturas/" aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'facturas' %}" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:bookmark-square-minimalistic-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -63,7 +63,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="direcciones/" aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'direcciones' %}"aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:planet-3-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -71,7 +71,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="datos/" aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'datos' %}" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:file-text-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -110,7 +110,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src={% static "images/dash/profile/user-1.jpg"%} alt="" width="35" height="35" class="rounded-circle">
+                  <img src="{% static 'images/dash/profile/user-1.jpg' %}" alt="" width="35" height="35" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
@@ -135,34 +135,21 @@
         </nav>
       </header>
       <!--  Header End -->
-
-      <div class="container-fluid">
-        <div class='row'>
-          <div class="col-lg-12 pl-1">
-            <div class="card ">
-              <div class="card-body ">
-                <h5 class="card-title fs-6 font-semibold">HAY QUE PENSAR QUE PONEMOS EN ESTA SECCION sobre el prestador {{ prestador.rol_usuario.usuario.nombre }} {{ prestador.rol_usuario.usuario.apellido }}!!!!</h5>
-
-              </div>
-            </div>
-          </div>
-        </div>
+          {% block content %} {% endblock %}
         <div class="py-6 px-6 text-center">
           <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
-              class="pe-1 text-primary text-decoration-underline">AdminMart.com</a>Distributed by <a href="https://themewagon.com/" target="_blank"
-              class="pe-1 text-primary text-decoration-underline">ThemeWagon</a></p>
-        </div>
-
+            class="pe-1 text-primary text-decoration-underline">AdminMart.com</a>Distributed by <a href="https://themewagon.com/" target="_blank"
+            class="pe-1 text-primary text-decoration-underline">ThemeWagon</a></p>
+        </div>    
       </div>
-    </div>
   </div>
-  <script src={% static "libs/jquery/dist/jquery.min.js"%}></script>
-  <script src={% static "libs/bootstrap/dist/js/bootstrap.bundle.min.js"%}></script>
-  <script src={% static "libs/apexcharts/dist/apexcharts.min.js"%}></script>
-  <script src={% static "libs/simplebar/dist/simplebar.js"%}></script>
-  <script src={% static "js/sidebarmenu.js"%}></script>
-  <script src={% static "js/app.min.js"%}></script>
-  <script src={% static "js/dashboard.js"%}></script>
+  <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+  <script src="{% static 'libs/simplebar/dist/simplebar.js' %}"></script>
+  <script src="{% static 'js/sidebarmenu.js' %}"></script>
+  <script src="{% static 'js/app.min.js' %}"></script>
+  <script src="{% static 'js/dashboard.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 
