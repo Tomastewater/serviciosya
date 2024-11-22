@@ -9,6 +9,7 @@ from apps.ubicacion.models import Direccion
 from apps.facturacion.models import Factura
 from apps.prestador.models import Prestador
 
+
 class usuarioFormView(generic.FormView):
     template_name = 'formRegistrarse.html'
     form_class = usuarioForm
