@@ -12,7 +12,7 @@ from apps.prestador.models import Prestador
 class usuarioFormView(generic.FormView):
     template_name = 'formRegistrarse.html'
     form_class = usuarioForm
-    success_url = reverse_lazy('register')
+    success_url = reverse_lazy('login')
 
     def form_valid(self, form):
         form.save()
