@@ -32,14 +32,15 @@ class Provincia(models.Model):
     nombre = models.IntegerField(choices=PROVINCIAS)
 
     def __str__(self):
-        return f'{self.nombre}'
+        provincia_nombre = dict(self.PROVINCIAS).get(self.nombre)
+        return provincia_nombre
     
 class Localidad(models.Model):
     nombre = models.CharField(max_length=100)
     provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.nombre}, {self.provincia}'
+        return f'{self.nombre}, {self.provincia.nombre}'
     
     def localidad_completa(self):
         return f'| {self.nombre} | {self.provincia.nombre} |'
