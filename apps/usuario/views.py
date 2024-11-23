@@ -64,9 +64,12 @@ class direccionView(generic.TemplateView):
     template_name = 'directions.html'
 
     def get_context_data(self, **kwargs):
+
+        usuario = self.request.user
+
         context =  super().get_context_data(**kwargs)
-        context['direcciones'] = Direccion.objects.all()
-        context['usuarios'] = Usuario.objects.all()
+        context['direcciones'] = Direccion.objects.filter(direccion__usuario =usuario)
+        context['usuarios'] = usuario
         return context
 
 class PrestadorView(generic.TemplateView):
