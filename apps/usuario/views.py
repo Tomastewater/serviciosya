@@ -1,18 +1,22 @@
 from django.views import generic
-from .form import usuarioForm
+from .form import UsuarioForm
 from apps.ubicacion.form import direccionForm
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Usuario, Rol
 from apps.contrato.models import Contrato
 from apps.ubicacion.models import Direccion
 from apps.facturacion.models import Factura
 from apps.prestador.models import Prestador
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class usuarioFormView(generic.FormView):
     template_name = 'formRegistrarse.html'
-    form_class = usuarioForm
+    form_class = UsuarioForm
     success_url = reverse_lazy('login')
 
     def form_valid(self, form):
@@ -38,13 +42,22 @@ class homeView(generic.TemplateView):
 class aboutView(generic.TemplateView):
     template_name = 'about.html'
 
-class consumidorView(generic.TemplateView):
+class consumidorView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'index_consumidor.html'
 
     def get_context_data(self, **kwargs):
-        context =  super().get_context_data(**kwargs)
-        context['contratos'] = Contrato.objects.all()
-        context['usuarios'] = Usuario.objects.all()
+        context = super().get_context_data(**kwargs)
+        
+        # Obtener el usuario autenticado
+        usuario = self.request.user
+
+        contratos = Contrato.objects.filter(direccion__usuario=usuario)  
+        direcciones = Direccion.objects.filter(usuario=usuario)
+        
+        context['contratos'] = contratos
+        context['direcciones'] = direcciones
+        context['usuario'] = usuario
+
         return context
         
 class direccionView(generic.TemplateView):
@@ -113,3 +126,21 @@ class PrestadorContratoView(generic.TemplateView):
         context['contratos'] = Contrato.objects.all().filter(servicio_prestado__prestador=3)
         context['prestador'] = Prestador.objects.get(id=3)
         return context
+    
+class CustomLoginView(generic.View):
+    def get(self, request, *args, **kwargs):
+        form = AuthenticationForm()
+        return render(request, 'registration/login.html', {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            # Si el formulario es válido, autenticamos al usuario
+            user = form.get_user()
+            login(request, user)
+            # messages.success(request, '¡Bienvenido! Has iniciado sesión correctamente.')
+            return redirect(reverse_lazy('consumidor'))  # Redirige a la vista de consumidor
+        else:
+            # Si no es válido, mostramos un mensaje de error
+            messages.error(request, 'Error en las credenciales, por favor intenta nuevamente.')
+            return render(request, 'registration/login.html', {'form': form})

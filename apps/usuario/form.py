@@ -1,45 +1,44 @@
-from datetime import datetime
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import Usuario, Rol
 from apps.consumidor.models import Consumidor
 from apps.prestador.models import Prestador
-from django.core.exceptions import ValidationError
 
-class usuarioForm(forms.Form):
-    nombre = forms.CharField(max_length=150)
-    apellido = forms.CharField(max_length=150)
-    email = forms.EmailField(required=True)
-    contraseña = forms.CharField(widget=forms.PasswordInput, required=True)
+class UsuarioForm(forms.ModelForm):
+    contraseña = forms.CharField(widget=forms.PasswordInput, required=True, label="Contraseña")
     eleccion = forms.ChoiceField(choices=Rol.ROLES, required=True)
+    
+    class Meta:
+        model = Usuario
+        fields = ['nombre', 'apellido', 'email', 'contraseña']
+    
+    def clean_email(self):
+        """
+        Validación para verificar si el correo ya está en uso.
+        Si ya está en uso, lanza un error de validación.
+        """
+        email = self.cleaned_data['email']
+        
+        # Verificar si el correo ya existe
+        if Usuario.objects.filter(email=email).exists():
+            raise ValidationError("Este correo electrónico ya está registrado. Prueba con otro")
+        
+        return email
 
-    def save(self):
-        if Usuario.objects.filter(email=self.cleaned_data['email']).exists():
-            raise ValidationError("Este correo electrónico ya está registrado.")  # Lanza un error si el correo ya existe
-        else:
+    def save(self, commit=True):
+        usuario = super().save(commit=False)
+        usuario.set_password(self.cleaned_data['contraseña'])  # Cifra la contraseña
+        
+        # Asigna el email como el valor del campo 'username' si no está vacío
+        usuario.username = usuario.email
 
-            fecha = datetime.now()
-            usuario = Usuario.objects.create(
-                nombre = self.cleaned_data['nombre'],
-                apellido = self.cleaned_data['apellido'],
-                email = self.cleaned_data['email'],
-                contraseña = self.cleaned_data['contraseña'],
-                fecha_creacion = fecha,
-            )
-            rol = Rol.objects.create(
-                usuario = usuario,
-                rol = int(self.cleaned_data['eleccion']),
-            )
+        if commit:
+            usuario.save()
+            rol = Rol.objects.create(usuario=usuario, rol=int(self.cleaned_data['eleccion']))
 
+            # Crear un modelo asociado según el rol seleccionado
             if rol.rol == 1:  # Consumidor
-                consumidor = Consumidor.objects.create(rol_usuario=rol)
-                print(f"Consumidor creado: {consumidor.rol_usuario.usuario.nombre}")
+                Consumidor.objects.create(rol_usuario=rol)
             elif rol.rol == 2:  # Prestador
-                prestador = Prestador.objects.create(rol_usuario=rol)
-                print(f"Prestador creado: {prestador.rol_usuario.usuario.nombre}")
-            else:
-                raise ValidationError("Rol no válido.")
-            
-
-
-
-
+                Prestador.objects.create(rol_usuario=rol)
+        return usuario

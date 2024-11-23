@@ -14,7 +14,7 @@
                 <img src= {%static 'images/herramientas.png' %} alt="Logo"> <!-- Añadir logo aquí -->
             </div>
             <h2>LOG IN</h2>
-            <form action="consumidor/" method="POST">
+            <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div class="input-group">
                     <label for="username">Usuario</label>
@@ -30,6 +30,14 @@
                 </div>
                 <input type="hidden" name="next" value="/home/">
                 <button type="submit" class="login-btn">Login</button>
+                <br>
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </form>
             <div class="forgot-password">
                 <a href="#">Forgot Password?</a>
