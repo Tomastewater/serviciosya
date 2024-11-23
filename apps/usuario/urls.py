@@ -1,5 +1,6 @@
 from .views import usuarioFormView, homeView, aboutView, consumidorView, direccionView, ubicacionFormView, PrestadorPanelView, PrestadorDireccionView, PrestadorDatosView, PrestadorContratoView, PrestadorFacturaView, CustomLoginView
 from django.contrib.auth.views import LogoutView
+from .views import ServiciosListView, ServicioDetailView, usuarioFormView, homeView, aboutView, consumidorView, direccionView, ubicacionFormView, PrestadorPanelView, PrestadorDireccionView, PrestadorView, PrestadorDatosView, PrestadorContratoView, servicesView, PrestadorFacturaView
 from django.urls import path
 
 
@@ -19,5 +20,7 @@ urlpatterns = [
     path('prestador/facturas/', PrestadorFacturaView.as_view(), name='facturas'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('servicios/', ServiciosListView.as_view(), name='servicios'),
+    path('servicios/<int:pk>/', ServicioDetailView.as_view(), name='servicio_detail'),
  
 ]

@@ -13,6 +13,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from apps.servicio.models import Servicio, Categoria, ServicioPrestado
+from django.db.models import Q
 
 class usuarioFormView(generic.FormView):
     template_name = 'formRegistrarse.html'
@@ -147,3 +149,60 @@ class CustomLoginView(generic.View):
             # Si no es válido, mostramos un mensaje de error
             messages.error(request, 'Error en las credenciales, por favor intenta nuevamente.')
             return render(request, 'registration/login.html', {'form': form})
+
+class servicesView(generic.TemplateView):
+    template_name = 'services.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        context['categorias'] = Categoria.objects.all()
+        categoria_id = self.request.GET.get('categoria', None)
+
+        if categoria_id:
+            context['servicios'] = Servicio.objects.filter(categoria_id=categoria_id).order_by('nombre')
+        else:
+            context['servicios'] = Servicio.objects.order_by('nombre')
+        return context
+    
+class ServiciosListView(generic.ListView):
+    model = Servicio
+    template_name = 'services.html'
+    context_object_name = 'servicios'
+    ordering = ['nombre']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        query = self.request.GET.get('q', '')
+        categoria_id = self.request.GET.get('categoria', None)
+
+        servicios = Servicio.objects.all()
+
+        if categoria_id:
+            servicios = servicios.filter(categoria_id=categoria_id)
+
+        if query:
+            servicios = servicios.filter(
+                Q(nombre__icontains=query) | Q(descripcion__icontains=query)
+            )
+
+        context['servicios'] = servicios
+        context['categorias'] = Categoria.objects.all()
+        context['query'] = query
+        context['categoria_id'] = categoria_id
+
+        return context
+
+class ServicioDetailView(generic.DetailView):
+    template_name = 'servicio_detail.html'
+    model = Servicio
+    context_object_name = 'servicio'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Obtén los servicios prestados relacionados con este servicio
+        context['prestadores'] = ServicioPrestado.objects.select_related(
+            'prestador', 'localidad', 'servicio'
+        ).filter(servicio=self.object)
+        return context

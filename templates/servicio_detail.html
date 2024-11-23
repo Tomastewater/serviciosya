@@ -1,0 +1,34 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detalle del Servicio</title>
+  <link rel="stylesheet" href={% static "css/dash/styles.min.css" %} />
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h1>Detalles del Servicio: {{ servicio.nombre }}</h1>
+    <p><strong>Descripción:</strong> {{ servicio.descripcion }}</p>
+    <p><strong>Categoría:</strong> {{ servicio.categoria.nombre }}</p>
+
+    <!-- Aquí podrías agregar la lista de prestadores que ofrecen este servicio -->
+    <h2>Prestadores:</h2>
+    <ul>
+      {% for prestador in servicio.servicioprestado_set.all %}
+        <li>{{ prestador.prestador.rol_usuario.usuario.nombre }} {{ prestador.prestador.rol_usuario.usuario.apellido }}</li>
+      {% empty %}
+        <p>No hay prestadores disponibles para este servicio.</p>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <script src={% static "libs/jquery/dist/jquery.min.js" %}></script>
+  <script src={% static "libs/bootstrap/dist/js/bootstrap.bundle.min.js" %}></script>
+</body>
+
+</html>
