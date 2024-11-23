@@ -15,9 +15,7 @@
                     <th scope="col" class="text-center">Ver mas</th>
                     <th scope="col" class="ps-4">Nombres</th>
                     <th scope="col" class="text-center">Apellidos</th>
-                    <th scope="col" class="ps-4">DNI</th>
                     <th scope="col" class="text-center">Email</th>
-                    <th scope="col" class="text-center">Teléfono</th>
                     <th scope="col" class="text-center">CUIL/CUIT</th>
                     <th scope="col" class="text-center">Estudios</th>
                   </tr>
@@ -30,10 +28,8 @@
                       </button>
                     </td>
                     <td class="text-center fw-medium">{{ prestador.rol_usuario.usuario.nombre }}</td>
-                    <td class="text-center fw-medium">{{ prestador.rol_usuario.usuario.apellido }}</td>
-                    <td class="text-center fw-medium">{{ prestador.rol_usuario.usuario.dni }}</td>
-                    <td class="text-center fw-medium">{{ prestador.rol_usuario.usuario.email }}</td>
-                    <td class="text-center fw-medium">{{ prestador.rol_usuario.usuario.telefono }}</td>
+                    <td class="text-center fw-medium">{{ prestador.apellido }}</td>
+                    <td class="text-center fw-medium">{{ prestador.email }}</td>
                     <td class="text-center fw-medium">{{ prestador.cuit }}</td>
                     <td class="text-center fw-medium">{{ prestador.estudios }}</td>
                      {% comment %} <td>

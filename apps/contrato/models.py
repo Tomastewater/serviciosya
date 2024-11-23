@@ -15,6 +15,7 @@ class Contrato(models.Model):
     direccion = models.ForeignKey("ubicacion.Direccion", on_delete=models.CASCADE, default=None)
     servicio_prestado = models.ForeignKey("servicio.ServicioPrestado", on_delete=models.CASCADE)
     factura = models.ForeignKey("facturacion.Factura", on_delete=models.CASCADE, null=True, blank=True, related_name="contratos")
+    consumidor = models.ForeignKey("consumidor.Consumidor", on_delete=models.CASCADE, null=True, blank=True, related_name="contratos")
 
     def __str__(self) -> str:
 

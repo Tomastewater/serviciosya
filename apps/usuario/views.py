@@ -83,14 +83,9 @@ class PrestadorView(generic.TemplateView):
         context['usuarios'] = Usuario.objects.all()
         return context
 
-class PrestadorPanelView(generic.TemplateView):
+class PrestadorPanelView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'prestador_panel.html'
 
-    def get_context_data(self, **kwargs):
-        context =  super().get_context_data(**kwargs)
-        context['prestador'] = Prestador.objects.get(id=3)
-        context['usuarios'] = Usuario.objects.all()
-        return context
 
 class PrestadorDatosView(generic.TemplateView):
     template_name = 'prestador_datos_personales.html'
