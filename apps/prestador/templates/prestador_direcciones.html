@@ -1,10 +1,11 @@
 {% extends 'index_prestador.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="container-fluid">
   <div class='row'>
-    <div class="col-lg-12 pl-1">
+    <div class="col-lg-8">
       <div class="card ">
         <div class="card-body ">
           <h5 class="card-title fs-6 font-semibold">Mis direcciones</h5>
@@ -44,6 +45,19 @@
         </div>
       </div>
     </div>
+    <div class="col-lg-4 pl-1">
+        <div class="card">
+            <div class="card-body">    
+              <h5 class="card-title fs-6 font-semibold">Agregar dirección</h5>
+              <form method="post">
+              {% csrf_token %}
+              {{form|crispy}}
+              <button type='submit' class="mt-4 text-white bg-green-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Agregar</button>
+              <button type="reset" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ml-3 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Limpiar</button>
+              </form>
+            </div>
+        </div> 
+    </div>        
   </div>
 </div>
 {% endblock %}

@@ -5,6 +5,7 @@ from apps.contrato.models import Contrato
 from apps.ubicacion.models import Direccion, Localidad, Provincia
 from apps.facturacion.models import Factura
 from apps.prestador.models import Prestador
+from apps.calificacion.models import Calificacion
 
 class PrestadorPanelView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'prestador_panel.html'
@@ -73,3 +74,14 @@ class PrestadorContratosListView(generic.ListView):
             # Filtrar contratos del prestador
             return Contrato.objects.filter(servicio_prestado__prestador=prestador)
         return Contrato.objects.none() 
+
+class CalificacionesListView(generic.ListView):
+    model = Calificacion
+    template_name = "calificaciones.html"
+    context_object_name = "calificaciones"
+
+    def get_queryset(self):
+        # Obtener el usuario logueado
+        usuario_actual = self.request.user
+
+        return Calificacion.objects.filter(prestador__rol_usuario__usuario=usuario_actual)

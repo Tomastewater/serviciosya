@@ -8,7 +8,7 @@ from django.db.models import Q
 
 from .form import UsuarioForm
 
-from apps.ubicacion.form import direccionForm
+#from apps.ubicacion.form import direccionForm
 from apps.servicio.models import Servicio, Categoria, ServicioPrestado
 
 class usuarioFormView(generic.FormView):
@@ -20,16 +20,6 @@ class usuarioFormView(generic.FormView):
         form.save()
         return super().form_valid(form)
     
-class ubicacionFormView(generic.FormView):
-    template_name = 'formUbicacion.html'
-    form_class = direccionForm
-    success_url = reverse_lazy('oneDirection')
-
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
-    
-
 class registerView(generic.TemplateView):
     template_name = 'register.html'
 
@@ -145,5 +135,12 @@ class direccionView(generic.TemplateView):
         context['direcciones'] = Direccion.objects.filter(direccion__usuario =usuario)
         context['usuarios'] = usuario
         return context
+class ubicacionFormView(generic.FormView):
+    template_name = 'formUbicacion.html'
+    form_class = direccionForm
+    success_url = reverse_lazy('oneDirection')
 
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 """        
