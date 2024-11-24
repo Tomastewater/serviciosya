@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mi perfil de prestador</title>
+  <title>Mi perfil de consumidor</title>
   <link rel="shortcut icon" type="image/png" href="{% static 'images/dash/logos/seodashlogo.png' %}" />
   <link rel="stylesheet" href="{% static 'css/dash/styles.min.css' %}" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -39,7 +39,7 @@
               <h1 class='text-2xl font-medium'>INICIO</h1>
             </div>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'panel' %}" aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'consumidor' %}" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -47,23 +47,23 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'contratos' %}"aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'contratos_consumidor' %}"aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
-                <span class="hide-menu fs-3">Contratos</span>
+                <span class="hide-menu fs-3">Servicios contratados</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'facturas' %}" aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'pagos' %}" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:bookmark-square-minimalistic-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
-                <span class="hide-menu fs-3">Facturas</span>
+                <span class="hide-menu fs-3">Pagos realizados</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'direcciones' %}"aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'dire_consumidor' %}"aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:planet-3-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -71,7 +71,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'datos' %}" aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'datos_consumidor' %}" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:file-text-bold-duotone" class="fs-6"></iconify-icon>
                 </span>

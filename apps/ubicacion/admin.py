@@ -9,7 +9,7 @@ class ProvinciaAdmin(admin.ModelAdmin):
 from apps.ubicacion.models import Localidad
 @admin.register(Localidad)
 class LocalidadAdmin(admin.ModelAdmin):
-    list_display = ["nombre", "provincia"]   
+    list_display = ["nombre", "provincia__nombre"]   
 
 from apps.ubicacion.models import Direccion
 @admin.register(Direccion)

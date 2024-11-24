@@ -1,4 +1,4 @@
-{% extends 'index_prestador.html' %}
+{% extends 'index_consumidor.html' %}
 {% load static %}
 {% block content %}
 
@@ -13,11 +13,10 @@
                 <thead>
                   <tr class="border-2 border-bottom border-primary border-0"> 
                     <th scope="col" class="text-center">Ver mas</th>
-                    <th scope="col" class="ps-4">Nombres</th>
-                    <th scope="col" class="text-center">Apellido</th>
+                    <th scope="col" class="text-center">Nro. de cliente</th>
+                    <th scope="col" class="text-center">Nombres</th>
+                    <th scope="col" class="text-center">Apellidos</th>
                     <th scope="col" class="text-center">Email</th>
-                    <th scope="col" class="text-center">CUIL/CUIT</th>
-                    <th scope="col" class="text-center">Estudios</th>
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -27,11 +26,10 @@
                         <img src="{% static 'images/dash/logos/file-search.svg' %}" alt="Ícono" class="w-6 h-6">
                       </button>
                     </td>
+                    <td class="text-center fw-medium">{{ usuario.id }}</td>
                     <td class="text-center fw-medium">{{ usuario.nombre }}</td>
                     <td class="text-center fw-medium">{{ usuario.apellido }}</td>
                     <td class="text-center fw-medium">{{ usuario.email }}</td>
-                    <td class="text-center fw-medium">{{ prestador.CUIT }}</td>
-                    <td class="text-center fw-medium">{{ prestador.estudios }}</td>
                      {% comment %} <td>
                       <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/index.html</a>
                     </td> {% endcomment %}
