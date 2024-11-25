@@ -1,4 +1,4 @@
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from .form import ModificarDireccionForm
 from django.http import Http404
 from .models import Direccion
@@ -24,5 +24,22 @@ class ModificarDireccionView(UpdateView):
         return direccion
 
     def get_success_url(self):
-        # Después de guardar, redirige a la vista 'dire_consumidor' (cambia esta URL por la correcta)
         return reverse_lazy('dire_consumidor')
+    
+class EliminarDireccionView(DeleteView):
+    model = Direccion
+    template_name = 'eliminar_direccion.html'
+    context_object_name = 'direccion'
+    success_url = reverse_lazy('dire_consumidor')  # Redirige después de la eliminación
+
+    pk_url_kwarg = 'direccion_id'  # Para usar el ID de la dirección en la URL
+
+    def get_object(self, queryset=None):
+        # Obtén la dirección con el id proporcionado en la URL
+        direccion = super().get_object(queryset)
+        
+        # Verifica que el usuario sea el propietario de la dirección
+        if direccion.usuario != self.request.user:
+            raise Http404("No tienes permiso para eliminar esta dirección")
+        
+        return direccion

@@ -1,0 +1,25 @@
+{% extends 'index_consumidor.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">¿Estás seguro de que deseas eliminar esta dirección?</h2>
+    
+    <div class="mb-4">
+      <p class="text-lg text-gray-600">{{ direccion.direccionCompleta }}</p>
+    </div>
+  
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <div class="flex justify-between">
+        <button type="submit" class="w-full sm:w-auto px-6 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-300">
+          Eliminar
+        </button>
+        <a href="{% url 'dire_consumidor' %}" class="w-full sm:w-auto px-6 py-2 border border-gray-300 text-gray-600 font-semibold rounded-lg text-center hover:bg-gray-100 transition duration-300">
+          Cancelar
+        </a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
