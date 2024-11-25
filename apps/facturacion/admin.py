@@ -4,4 +4,6 @@ from django.contrib import admin
 from .models import Factura
 @admin.register(Factura)
 class FacturaAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["id", "fecha_emision", "monto_total"]
+    search_fields = ["id"]
+    list_filter = ["fecha_emision"]

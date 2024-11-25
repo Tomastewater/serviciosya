@@ -9,6 +9,6 @@ class Prestador(models.Model):
 
     def __str__(self):
         nombre_completo = f"{self.rol_usuario.usuario.nombre} {self.rol_usuario.usuario.apellido}"
-        return f"{nombre_completo} | Código Fiscal: {self.codFiscal}"
+        return f"{nombre_completo} | CUIT: {self.CUIT}"
     
         

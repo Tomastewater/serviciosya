@@ -67,7 +67,7 @@
                 <span>
                   <iconify-icon icon="solar:planet-3-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
-                <span class="hide-menu fs-3">Direcciones</span>
+                <span class="hide-menu fs-3">Zonas de servicios</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -78,6 +78,7 @@
                 <span class="hide-menu fs-3">Calificaciones recibidas</span>
               </a>
             </li>
+<<<<<<< HEAD
             <li class="sidebar-item">
               <form method="post" action="{% url 'logout' %}" class="d-inline">
                 {% csrf_token %}
@@ -90,6 +91,8 @@
               </form>
             </li>
             
+=======
+>>>>>>> 7e6763612206f6b8b05a67193c4badacbfad7823
           </ul>
           
         </nav>
@@ -115,18 +118,6 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-user fs-6"></i>
-                      <p class="mb-0 fs-3">Mi perfil</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">Mi cuenta</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">Mi billetera</p>
-                    </a>
                     <form method="post" action="{% url 'logout' %}" class="mx-3 mt-2 d-block">
                       {% csrf_token %}
                       <button type="submit" class="btn btn-outline-primary">Cerrar sesión</button>
@@ -141,9 +132,7 @@
       <!--  Header End -->
           {% block content %} {% endblock %}
         <div class="py-6 px-6 text-center">
-          <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
-            class="pe-1 text-primary text-decoration-underline">AdminMart.com</a>Distributed by <a href="https://themewagon.com/" target="_blank"
-            class="pe-1 text-primary text-decoration-underline">ThemeWagon</a></p>
+          <p class="mb-0 fs-4">Design and Developed by SevenUp Group</p>
         </div>    
       </div>
   </div>

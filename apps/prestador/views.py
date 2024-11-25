@@ -6,6 +6,7 @@ from apps.servicio.models import ServicioPrestado
 from apps.facturacion.models import Factura
 from apps.prestador.models import Prestador
 from apps.calificacion.models import Calificacion
+from apps.ubicacion.models import Direccion, Localidad, Provincia
 
 class PrestadorPanelView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'prestador_panel.html'
@@ -31,7 +32,19 @@ class PrestadorDatosView(generic.TemplateView):
         context['usuario'] = usuario_actual
         context['prestador'] = prestador
         return context
+    
 
+class PrestadorDireccionListView(generic.ListView):
+    model = Direccion
+    template_name = 'prestador_direcciones.html'
+    context_object_name = 'direcciones'
+
+    def get_queryset(self):
+        usuario_actual = self.request.user
+        prestador = Prestador.objects.get(rol_usuario__usuario=usuario_actual)  # Obtiene el prestador del usuario actual
+        return Direccion.objects.filter(usuario=usuario_actual)
+
+"""
 class PrestadorDireccionListView(generic.ListView):
     model = ServicioPrestado
     template_name = 'prestador_direcciones.html'
@@ -42,7 +55,7 @@ class PrestadorDireccionListView(generic.ListView):
         prestador = Prestador.objects.get(rol_usuario__usuario=usuario_actual)  # Obtiene el prestador del usuario actual
         return ServicioPrestado.objects.filter(prestador=prestador)
     
-    
+"""    
 
 class PrestadorFacturasListView(generic.ListView):
     model = Factura

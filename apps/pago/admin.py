@@ -6,9 +6,11 @@ from apps.pago.models import Pago
 
 @admin.register(MetodoPago)
 class MetodoPagoAdmin(admin.ModelAdmin):
-    list_display = ["nombre"]  
+    list_display = ["id", "nombre"]
 
 
 @admin.register(Pago)
 class PagoAdmin(admin.ModelAdmin):
     list_display = ["id", "fecha_pago", "monto_pago", "estado"]
+    search_fields = ["id", "estado"]
+    list_filter = ["fecha_pago"]
