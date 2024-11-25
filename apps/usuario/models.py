@@ -26,4 +26,4 @@ class Rol(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="roles")
 
     def __str__(self):
-        return f"Rol: {'Consumidor' if self.rol == 1 else 'Prestador de servicio'} de {self.usuario.nombre}"
+        return f"Rol: {'Consumidor' if self.rol == 1 else 'Prestador de servicio'}"

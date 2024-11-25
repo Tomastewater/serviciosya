@@ -5,4 +5,6 @@ from .models import Prestador
 
 @admin.register(Prestador)
 class PrestadorAdmin(admin.ModelAdmin):
-    list_display = ["id", "rol_usuario", "codFiscal"]
+    list_display = ["id", "rol_usuario__usuario__nombre", "rol_usuario__usuario__apellido", "CUIT"]
+    search_fields = ["rol_usuario__usuario__apellido"]
+    list_filter = ["rol_usuario__usuario__fecha_creacion"]
