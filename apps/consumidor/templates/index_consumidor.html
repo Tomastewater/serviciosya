@@ -126,7 +126,10 @@
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">Mi billetera</p>
                     </a>
-                    <a href="./login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar sesion</a>
+                    <form method="post" action="{% url 'logout' %}" class="mx-3 mt-2 d-block">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-outline-primary">Cerrar sesión</button>
+                    </form>
                   </div>
                 </div>
               </li>
