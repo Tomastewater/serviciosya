@@ -10,7 +10,7 @@ class Usuario(AbstractUser):
     fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nombre', 'apellido']
+    REQUIRED_FIELDS = ['username', 'nombre', 'apellido']
     
     def __str__(self):
         return f"{self.nombre} {self.apellido} ({self.email})"

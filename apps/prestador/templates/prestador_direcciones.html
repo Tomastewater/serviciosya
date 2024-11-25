@@ -14,26 +14,22 @@
                 <thead>
                   <tr class="border-2 border-bottom border-primary border-0"> 
                     <th scope="col" class="text-center">Ver mas</th>
-                    <th scope="col" class="text-center">Calle</th>
-                    <th scope="col" class="text-center">Altura</th>
+                    <th scope="col" class="text-center">Servicio</th>
                     <th scope="col" class="text-center">Localidad</th>
                     <th scope="col" class="text-center">Provincia</th>
-                    <th scope="col" class="text-center">Código postal</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                  {% for direccion in direcciones %}
+                  {% for servicio in servicios %}
                     <tr>
                       <td class="text-center fw-medium">
                         <button type="button" class="flex justify-center items-center text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full px-3 py-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                           <img src="{% static 'images/dash/logos/file-search.svg' %}" alt="Ícono" class="w-6 h-6">
                         </button>
                       </td>
-                      <td class="text-center fw-medium">{{direccion.calle}}</td>
-                      <td class="text-center fw-medium">{{direccion.altura}}</td>
-                      <td class="text-center fw-medium">{{direccion.localidad}}</td>
-                      <td class="text-center fw-medium">{{direccion.localidad.provincia}}</td>
-                      <td class="text-center fw-medium">{{direccion.codigo_postal}}</td>
+                      <td class="text-center fw-medium">{{servicio.servicio}}</td>
+                      <td class="text-center fw-medium">{{servicio.localidad.nombre}}</td>
+                      <td class="text-center fw-medium">{{servicio.localidad.provincia}}</td>
                       {% comment %} <td>
                       <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/index.html</a>
                       </td> {% endcomment %}    

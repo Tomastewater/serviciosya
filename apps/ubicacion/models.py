@@ -40,7 +40,7 @@ class Localidad(models.Model):
     provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.nombre}, {self.provincia.nombre}'
+        return f'{self.nombre}, {self.provincia.__str__()}'
     
     def localidad_completa(self):
         return f'| {self.nombre} | {self.provincia.nombre} |'
