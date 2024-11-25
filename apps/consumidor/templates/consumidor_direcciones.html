@@ -24,9 +24,15 @@
                   {% for direccion in direcciones %}
                     <tr>
                       <td class="text-center fw-medium">
-                        <button type="button" class="flex justify-center items-center text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full px-3 py-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                          <img src="{% static 'images/dash/logos/file-search.svg' %}" alt="Ícono" class="w-6 h-6">
-                        </button>
+                        <div class="d-flex gap-2 justify-content-center">
+                          <a href="{% url 'modificar_direccion' direccion_id=direccion.id %}" class="btn btn-warning">
+                            Modificar
+                          </a>
+                  
+                          <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#confirmarEliminarModal">
+                            Eliminar
+                          </a>
+                        </div>
                       </td>
                       <td class="text-center fw-medium">{{ direccion.calle }}</td>
                       <td class="text-center fw-medium">{{ direccion.altura }}</td>
