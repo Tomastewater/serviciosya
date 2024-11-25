@@ -7,6 +7,7 @@ from apps.facturacion.models import Factura
 from apps.prestador.models import Prestador
 from apps.calificacion.models import Calificacion
 from apps.ubicacion.models import Direccion, Localidad, Provincia
+from apps.ubicacion.form import DireccionForm
 
 class PrestadorPanelView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'prestador_panel.html'
@@ -34,7 +35,8 @@ class PrestadorDatosView(generic.TemplateView):
         return context
     
 
-class PrestadorDireccionListView(generic.ListView):
+class PrestadorDireccionListView(generic.ListView, generic.edit.FormMixin):
+    form_class = DireccionForm
     model = Direccion
     template_name = 'prestador_direcciones.html'
     context_object_name = 'direcciones'
