@@ -3,6 +3,7 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path
 from apps.prestador.views import PrestadorPanelView, PrestadorDireccionListView, PrestadorDatosView, PrestadorContratosListView, PrestadorFacturasListView, CalificacionesListView
 from apps.consumidor.views import ConsumidorPanelView, ConsumidorDireccionListView, ConsumidorDatosView, ConsumidorContratosListView, ConsumidorPagosListView
+from apps.ubicacion.views import ModificarDireccionView 
 
 urlpatterns = [
 
@@ -13,7 +14,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('servicios/', ServiciosListView.as_view(), name='servicios'),
     path('servicios/<int:pk>/', ServicioDetailView.as_view(), name='servicio_detail'),
-    path('prestador/', PrestadorPanelView.as_view(), name='panel'),
+    path('prestador/', PrestadorPanelView.as_view(), name='prestador'),
     path('prestador/datos/', PrestadorDatosView.as_view(), name='datos'),
     path('prestador/direcciones/', PrestadorDireccionListView.as_view(), name='direcciones'),
     path('prestador/contratos/', PrestadorContratosListView.as_view(), name='contratos'),
@@ -24,4 +25,6 @@ urlpatterns = [
     path('consumidor/direcciones/', ConsumidorDireccionListView.as_view(), name='dire_consumidor'),
     path('consumidor/contratos/', ConsumidorContratosListView.as_view(), name='contratos_consumidor'),
     path('consumidor/pagos/', ConsumidorPagosListView.as_view(), name='pagos'),
+    path('consumidor/modificar_direccion/<int:direccion_id>/', ModificarDireccionView.as_view(), name='modificar_direccion'),
+
 ]

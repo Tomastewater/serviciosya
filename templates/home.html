@@ -94,7 +94,7 @@
                                  <a class="nav-link" href="index.html"> Inicio </a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href=#aboutus>Acerca de nosotros </a>
+                                 <a class="nav-link" href=#aboutus>Nosotros</a>
                               </li>
                               <li class="nav-item">
                                  <a class="nav-link" href="{% url 'servicios' %}">Servicios</a>
@@ -187,47 +187,23 @@
             <div class="col-md-4 col-sm-6">
                <div id="ho_color" class="service_box">
                   <img src={% static "images/service_icon1.png"%} alt="#" />
-                  <h3>DIGITAL marketing</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and1500s, </p>
+                  <h3>Plomeria hogareña</h3>
+                  <p>Ofrecemos servicios de plomería para resolver cualquier problema de tuberías, grifos o desagües, asegurando que tu sistema de agua funcione perfectamente y sin inconvenientes.</p>
                </div>
             </div>
             <div class="col-md-4 col-sm-6">
                <div id="ho_color" class="service_box">
                   <img src={% static "images/service_icon2.png"%} alt="#" />
-                  <h3>FINANCIAL PLANING</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and1500s, </p>
+                  <h3>Electricidad hogareña</h3>
+                  <p>Nuestros electricistas certificados están listos para solucionar cualquier problema eléctrico en tu hogar, desde reparaciones hasta instalaciones nuevas, garantizando seguridad y eficiencia.</p>
                </div>
             </div>
             <div class="col-md-4 col-sm-6">
                <div id="ho_color" class="service_box">
                   <img src={% static "images/service_icon3.png"%} alt="#" />
-                  <h3>DIGITAL marketing</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and1500s, </p>
+                  <h3>Cerrajeria Hogareña</h3>
+                  <p>Nuestros cerrajeros expertos están disponibles para ayudarte con instalaciones de cerraduras, duplicado de llaves y asistencia en caso de emergencia, manteniendo tu hogar seguro y protegido.</p>
                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-               <div id="ho_color" class="service_box">
-                  <img src={% static "images/service_icon4.png"%} alt="#" />
-                  <h3>BUSINESS CONSULTING</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and1500s, </p>
-               </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-               <div id="ho_color" class="service_box">
-                  <img src={% static "images/service_icon5.png"%} alt="#" />
-                  <h3>MARKETING RESEARCH</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and1500s, </p>
-               </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-               <div id="ho_color" class="service_box">
-                  <img src={% static "images/service_icon6.png"%} alt="#" />
-                  <h3>UX RESEARCH</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and1500s, </p>
-               </div>
-            </div>
-            <div class="col-md-12">
-               <a class="read_more" href="#">Leer mas</a>
             </div>
          </div>
       </div>
@@ -240,9 +216,11 @@
          <div class="row">
             <div class="col-md-12 ">
                <div class="titlepage">
-                  <h2><strong class="yellow">PORTFOLIO</strong><br> CHOOSE A PROFESSIONAL DESIGN</h2>
-                  <span>Websites</span>
-                  <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distrib</p>
+                  <h2><strong class="yellow">PORTFOLIO</strong><br> NUESTROS PROFESIONALES</h2>
+                  <p>Ofrecemos servicios profesionales
+                     para mantener tu hogar seguro y en perfecto funcionamiento. Nuestro equipo está disponible las 24 horas, listos 
+                     para resolver cualquier emergencia. Confía en nosotros para un servicio rápido, eficiente y de alta calidad.
+                  </p>
                </div>
             </div>
          </div>
@@ -290,9 +268,6 @@
                               </div>
                            </div>
                         </div>
-                        <div class="col-md-12">
-                           <a class="read_more" href="#">Leer mas</a>
-                        </div>
                      </div>
                   </div>
                </div>
@@ -311,7 +286,7 @@
                         </div>
                         <div class="col-md-3 col-sm-6">
                            <div class="portfolio_img">
-                              <img src="images/potf2.jpg" alt="#" />
+                              <img src={% static "images/potf2.jpg"%} alt="#" />
                               <div class="middle">
                                  <div class="text2">Ver mas</div>
                               </div>
@@ -332,9 +307,6 @@
                                  <div class="text2">Ver mas</div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-md-12">
-                           <a class="read_more" href="#">Leer mas</a>
                         </div>
                      </div>
                   </div>
@@ -376,9 +348,6 @@
                               </div>
                            </div>
                         </div>
-                        <div class="col-md-12">
-                           <a class="read_more" href="#">Leer mas</a>
-                        </div>
                      </div>
                   </div>
                </div>
@@ -399,8 +368,8 @@
          <div class="row">
             <div class="col-md-7">
                <div class="titlepage">
-                  <h2><strong class="yellow">CREATE</strong><br>PERSONALISED Business</h2>
-                  <p>ss normal distribution of letters, as opposed to using </p>
+                  <h2><strong class="yellow">Premios y Nominaciones</strong><br>SERVICIOS DE ALTA CALIDAD</h2>
+                  <p>El mejor servicio al alcance rapido y responsable </p>
                </div>
             </div>
          </div>
@@ -409,32 +378,29 @@
                <div id="ho_color" class="business_box">
                   <i><img src={% static "images/business_icon1.png"%} alt="#" /></i>
                   <h3>23</h3>
-                  <p>NOMINATIONS </p>
+                  <p>NOMINACIONES </p>
                </div>
             </div>
             <div class="col-md-3 col-sm-6">
                <div id="ho_color" class="business_box">
                   <i><img src={% static "images/business_icon2.png"%} alt="#" /></i>
                   <h3>31</h3>
-                  <p>AGENCIES</p>
+                  <p>AGENCIAS</p>
                </div>
             </div>
             <div class="col-md-3 col-sm-6">
                <div id="ho_color" class="business_box">
                   <i><img src={% static "images/business_icon3.png"%} alt="#" /></i>
                   <h3>7</h3>
-                  <p>AWARDS</p>
+                  <p>PREMIOS</p>
                </div>
             </div>
             <div class="col-md-3 col-sm-6">
                <div id="ho_color" class="business_box">
                   <i><img src={% static "images/business_icon4.png"%} alt="#" /></i>
                   <h3>8</h3>
-                  <p>Supported </p>
+                  <p>SOPORTE </p>
                </div>
-            </div>
-            <div class="col-md-12">
-               <a class="read_more" href="#">Leer mas</a>
             </div>
          </div>
       </div>
@@ -446,7 +412,7 @@
          <div class="row">
             <div class="col-md-12">
                <div class="titlepage">
-                  <h2><strong class="yellow">Equipo</strong><br>We Have a Professional Team of Business Analysts.</h2>
+                  <h2><strong class="yellow">Equipo</strong><br>Tenemos un equipo profesional de técnicos especializados.</h2>
                </div>
             </div>
          </div>
@@ -619,7 +585,7 @@
          <div class="row">
             <div class="col-md-12">
                <div class="titlepage">
-                  <h2><strong class="yellow">Testimonios</strong><br>What is Syas our clients</h2>
+                  <h2><strong class="yellow">Testimonios</strong><br>Lo que dicen nuestros clientes</h2>
                </div>
             </div>
          </div>
@@ -637,8 +603,8 @@
                      <div class="row">
                         <div class="col-md-6 offset-md-3">
                            <div class="test_box">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
-                              <i><img src={% static "images/cos.jpg"%} alt="#" /></i> <span>Consectetur</span>
+                              <p>"El servicio de electricidad hogareña fue excepcional. Los técnicos fueron puntuales y resolvieron todos mis problemas rápidamente. ¡Muy recomendable!" </p>
+                              <i><img src={% static "images/cos.jpg"%} alt="#" /></i> <span>Mariano G.</span>
                            </div>
                         </div>
                      </div>
@@ -651,8 +617,8 @@
                      <div class="row">
                         <div class="col-md-6 offset-md-3">
                            <div class="test_box">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
-                              <i><img src={% static "images/cos.jpg"%} alt="#" /></i> <span>Consectetur</span>
+                              <p>"Tuve una emergencia de plomería y el equipo llegó en menos de una hora. Solucionaron el problema de inmediato. ¡Gran servicio y profesionalismo!" </p>
+                              <i><img src={% static "images/cos.jpg"%} alt="#" /></i> <span>Mariano G.</span>
                            </div>
                         </div>
                      </div>
@@ -665,8 +631,8 @@
                      <div class="row">
                         <div class="col-md-6 offset-md-3">
                            <div class="test_box">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
-                              <i><img src={% static "images/cos.jpg"%} alt="#" /></i> <span>Consectetur</span>
+                              <p>"Perdí las llaves de mi casa y los cerrajeros me ayudaron en cuestión de minutos. ¡Servicio rápido y eficiente! Definitivamente los volveré a llamar." </p>
+                              <i><img src={% static "images/cos.jpg"%} alt="#" /></i> <span>Mariano G.</span>
                            </div>
                         </div>
                      </div>
@@ -689,7 +655,7 @@
          <div class="row">
             <div class="col-md-12">
                <div class="titlepage">
-                  <h2><strong class="yellow">Contactanos</strong><br>Request a call back</h2>
+                  <h2><strong class="yellow">Contactanos</strong><br>Te llamaremos en seguida</h2>
                </div>
             </div>
          </div>

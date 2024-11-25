@@ -104,9 +104,9 @@
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
               <a href="#" target="_blank"
-                class="btn btn-primary me-2"><span class="d-none d-md-block">Quiero prestar servicio Ya!</span> <span class="d-block d-md-none">Pro</span></a>
+                class="btn btn-primary me-2"><span class="d-none d-md-block">Quiero prestar servicio Ya!</span></a>
               <a href="#" target="_blank"
-                class="btn btn-success"><span class="d-none d-md-block">Recomendar a un amigo</span> <span class="d-block d-md-none">Free</span></a>
+                class="btn btn-success"><span class="d-none d-md-block">Recomendar a un amigo</span></a>
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
@@ -126,7 +126,10 @@
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">Mi billetera</p>
                     </a>
-                    <a href="./login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar sesion</a>
+                    <form method="post" action="{% url 'logout' %}" class="mx-3 mt-2 d-block">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-outline-primary">Cerrar sesión</button>
+                    </form>
                   </div>
                 </div>
               </li>

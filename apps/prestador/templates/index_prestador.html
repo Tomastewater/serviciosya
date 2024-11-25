@@ -39,7 +39,7 @@
               <h1 class='text-2xl font-medium'>INICIO</h1>
             </div>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'panel' %}" aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'prestador' %}" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -124,7 +124,10 @@
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">Mi billetera</p>
                     </a>
-                    <a href="./login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar sesion</a>
+                    <form method="post" action="{% url 'logout' %}" class="mx-3 mt-2 d-block">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-outline-primary">Cerrar sesión</button>
+                    </form>
                   </div>
                 </div>
               </li>

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from apps.contrato.models import Contrato
-from apps.ubicacion.models import Direccion, Localidad, Provincia
+from apps.servicio.models import ServicioPrestado
 from apps.facturacion.models import Factura
 from apps.prestador.models import Prestador
 from apps.calificacion.models import Calificacion
@@ -33,15 +33,16 @@ class PrestadorDatosView(generic.TemplateView):
         return context
 
 class PrestadorDireccionListView(generic.ListView):
-    model = Direccion, Localidad, Provincia
-    template_name = "prestador_direcciones.html"
-    context_object_name = "direcciones"
+    model = ServicioPrestado
+    template_name = 'prestador_direcciones.html'
+    context_object_name = 'servicios'
 
     def get_queryset(self):
-        # Obtener el usuario logueado
         usuario_actual = self.request.user
-
-        return Direccion.objects.filter(usuario = usuario_actual)
+        prestador = Prestador.objects.get(rol_usuario__usuario=usuario_actual)  # Obtiene el prestador del usuario actual
+        return ServicioPrestado.objects.filter(prestador=prestador)
+    
+    
 
 class PrestadorFacturasListView(generic.ListView):
     model = Factura
