@@ -79,13 +79,17 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
-                <span>
-                  <iconify-icon icon="solar:login-3-bold-duotone" class="fs-6"></iconify-icon>
-                </span>
-                <span class="hide-menu fs-3">Cerrar sesion</span>
-              </a>
+              <form method="post" action="{% url 'logout' %}" class="d-inline">
+                {% csrf_token %}
+                <a class="sidebar-link" href="#" aria-expanded="false" onclick="this.closest('form').submit(); return false;">
+                  <span>
+                    <iconify-icon icon="solar:login-3-bold-duotone" class="fs-6"></iconify-icon>
+                  </span>
+                  <span class="hide-menu fs-3">Cerrar sesión</span>
+                </a>
+              </form>
             </li>
+            
             
           </ul>
           
