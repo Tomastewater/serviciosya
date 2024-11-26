@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
+from django.urls import reverse_lazy
 from apps.contrato.models import Contrato
 from apps.servicio.models import ServicioPrestado
 from apps.facturacion.models import Factura
@@ -36,28 +37,40 @@ class PrestadorDatosView(generic.TemplateView):
     
 
 class PrestadorDireccionListView(generic.ListView, generic.edit.FormMixin):
-    form_class = DireccionForm
     model = Direccion
     template_name = 'prestador_direcciones.html'
     context_object_name = 'direcciones'
+    form_class = DireccionForm
 
     def get_queryset(self):
         usuario_actual = self.request.user
-        prestador = Prestador.objects.get(rol_usuario__usuario=usuario_actual)  # Obtiene el prestador del usuario actual
         return Direccion.objects.filter(usuario=usuario_actual)
 
-"""
-class PrestadorDireccionListView(generic.ListView):
-    model = ServicioPrestado
-    template_name = 'prestador_direcciones.html'
-    context_object_name = 'servicios'
-
-    def get_queryset(self):
-        usuario_actual = self.request.user
-        prestador = Prestador.objects.get(rol_usuario__usuario=usuario_actual)  # Obtiene el prestador del usuario actual
-        return ServicioPrestado.objects.filter(prestador=prestador)
+    def get_context_data(self, **kwargs):
+        # Agrega el formulario al contexto de la plantilla
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()  # Incluye el formulario en el contexto
+        return context
     
-"""    
+    def post(self, request, *args, **kwargs):
+        # Manejo del formulario al enviarse
+        form = self.get_form()
+        if form.is_valid():
+            nueva_direccion = form.save(commit=False)
+            nueva_direccion.usuario = self.request.user  # Asocia la dirección al usuario logueado
+            nueva_direccion.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        # Redirige a la misma página después de guardar la dirección
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Redirige a la misma página
+        return reverse_lazy('direcciones')    
+
 
 class PrestadorFacturasListView(generic.ListView):
     model = Factura
