@@ -3,7 +3,7 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path
 from apps.prestador.views import PrestadorPanelView, PrestadorDireccionListView, PrestadorDatosView, PrestadorContratosListView, PrestadorFacturasListView, CalificacionesListView
 from apps.consumidor.views import ConsumidorPanelView, ConsumidorDireccionListView, ConsumidorDatosView, ConsumidorContratosListView, ConsumidorPagosListView
-from apps.ubicacion.views import ModificarDireccionView, EliminarDireccionView
+from apps.ubicacion.views import ModificarDireccionView, EliminarDireccionView, PrestadorEliminarDireccionView, PrestadorModificarDireccionView
 
 urlpatterns = [
 
@@ -20,6 +20,8 @@ urlpatterns = [
     path('prestador/contratos/', PrestadorContratosListView.as_view(), name='contratos'),
     path('prestador/facturas/', PrestadorFacturasListView.as_view(), name='facturas'),
     path('prestador/calificaciones/', CalificacionesListView.as_view(), name='calificaciones'),
+    path('prestador/modificar_direccion/<int:direccion_id>/', PrestadorModificarDireccionView.as_view(), name='modificar_dire_prestador'),
+    path('prestador/eliminar_direccion/<int:direccion_id>/', PrestadorEliminarDireccionView.as_view(), name='eliminar_dire_prestador'),
     path('consumidor/', ConsumidorPanelView.as_view(), name='consumidor'),
     path('consumidor/datos/', ConsumidorDatosView.as_view(), name='datos_consumidor'),
     path('consumidor/direcciones/', ConsumidorDireccionListView.as_view(), name='dire_consumidor'),
