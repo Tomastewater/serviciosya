@@ -1,12 +1,13 @@
-from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
 from django.views import generic
 from django.urls import reverse_lazy
 from apps.contrato.models import Contrato
-from apps.ubicacion.models import Direccion, Localidad, Provincia
-from apps.consumidor.models import Consumidor
+from apps.ubicacion.models import Direccion
 from apps.pago.models import Pago
-from apps.ubicacion.form import DireccionForm
+from apps.ubicacion.form import DireccionForm, ModificarDireccionForm
+from django.views.generic.edit import UpdateView, DeleteView
+
 
 class ConsumidorPanelView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'consumidor_panel.html'
@@ -66,6 +67,46 @@ class ConsumidorDireccionListView(generic.ListView, generic.edit.FormMixin):
     def get_success_url(self):
         # Redirige a la misma página
         return reverse_lazy('dire_consumidor')
+    
+class ModificarDireccionView(UpdateView):
+    model = Direccion
+    form_class = ModificarDireccionForm
+    template_name = 'modificar_direccion.html'
+    context_object_name = 'form'
+
+    # El campo que debe ser actualizado en la URL
+    pk_url_kwarg = 'direccion_id'
+
+    def get_object(self, queryset=None):
+        # Obtén la dirección con el id proporcionado en la URL
+        direccion = super().get_object(queryset)
+        
+        # Verifica que el usuario sea el propietario de la dirección
+        if direccion.usuario != self.request.user:
+            raise Http404("No tienes permiso para modificar esta dirección")
+        
+        return direccion
+
+    def get_success_url(self):
+        return reverse_lazy('dire_consumidor')
+    
+class EliminarDireccionView(DeleteView):
+    model = Direccion
+    template_name = 'eliminar_direccion.html'
+    context_object_name = 'direccion'
+    success_url = reverse_lazy('dire_consumidor')  # Redirige después de la eliminación
+
+    pk_url_kwarg = 'direccion_id'  # Para usar el ID de la dirección en la URL
+
+    def get_object(self, queryset=None):
+        # Obtén la dirección con el id proporcionado en la URL
+        direccion = super().get_object(queryset)
+        
+        # Verifica que el usuario sea el propietario de la dirección
+        if direccion.usuario != self.request.user:
+            raise Http404("No tienes permiso para eliminar esta dirección")
+        
+        return direccion
 
 class ConsumidorPagosListView(generic.ListView):
     model = Pago

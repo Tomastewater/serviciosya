@@ -2,8 +2,8 @@ from .views import usuarioFormView, homeView, aboutView, ServiciosListView, Serv
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 from apps.prestador.views import PrestadorPanelView, PrestadorDireccionListView, PrestadorDatosView, PrestadorContratosListView, PrestadorFacturasListView, CalificacionesListView
-from apps.consumidor.views import ConsumidorPanelView, ConsumidorDireccionListView, ConsumidorDatosView, ConsumidorContratosListView, ConsumidorPagosListView
-from apps.ubicacion.views import ModificarDireccionView, EliminarDireccionView, PrestadorEliminarDireccionView, PrestadorModificarDireccionView
+from apps.consumidor.views import ConsumidorPanelView, ConsumidorDireccionListView, ConsumidorDatosView, ConsumidorContratosListView, ConsumidorPagosListView, ModificarDireccionView, EliminarDireccionView
+from apps.ubicacion.views import PrestadorEliminarDireccionView, PrestadorModificarDireccionView
 
 urlpatterns = [
 
