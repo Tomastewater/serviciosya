@@ -44,9 +44,8 @@ class ConsumidorDireccionListView(generic.ListView, generic.edit.FormMixin):
         return Direccion.objects.filter(usuario=usuario_actual)
 
     def get_context_data(self, **kwargs):
-        # Agrega el formulario al contexto de la plantilla
         context = super().get_context_data(**kwargs)
-        context['form'] = self.get_form()  # Incluye el formulario en el contexto
+        context['form'] = self.get_form() 
         return context
     
     def post(self, request, *args, **kwargs):

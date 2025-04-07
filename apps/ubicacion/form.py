@@ -13,22 +13,18 @@ class DireccionForm(forms.Form):
     localidad = forms.CharField(max_length=150, required=True)
 
     def save(self, commit=True):
-        # Verifica si la dirección ya existe
         if Direccion.objects.filter(calle=self.cleaned_data['calle'], altura=self.cleaned_data['altura']).exists():
             raise ValidationError("Esta direccion ya esta registrada")  # Lanza un error si la calle y la altura ya existen
         
-        # Crea la provincia
         provincia = Provincia.objects.create(
             nombre=self.cleaned_data['provincia'],
         )
         
-        # Crea la localidad
         localidad = Localidad.objects.create(
             nombre=self.cleaned_data['localidad'],
             provincia=provincia,
         )
         
-        # Crea la dirección y, si commit=True, guarda en la base de datos
         direccion = Direccion(
             calle=self.cleaned_data['calle'],
             altura=self.cleaned_data['altura'],
@@ -39,7 +35,7 @@ class DireccionForm(forms.Form):
         )
 
         if commit:
-            direccion.save()  # Guarda la dirección en la base de datos si commit es True
+            direccion.save()
 
         return direccion
 
