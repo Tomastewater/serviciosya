@@ -154,3 +154,7 @@ AUTH_USER_MODEL = 'usuario.Usuario'
 LOGIN_URL = 'login' 
 
 LOGOUT_REDIRECT_URL = 'home'
+
+MEDIA_URL = '/imagenes/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'imagenes')
