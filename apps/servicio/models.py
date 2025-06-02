@@ -19,6 +19,10 @@ class ServicioPrestado(models.Model):
     prestador = models.ForeignKey("prestador.Prestador", on_delete=models.CASCADE)
     localidad = models.ForeignKey("ubicacion.Localidad", on_delete=models.CASCADE, default=None)
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
+    precio = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    imagen = models.ImageField(upload_to='servicios_prestados/', null=True, blank=True)
+    descripcion = models.TextField(max_length=500, null=True, blank=True)
+
 
     def __str__(self) -> str:
         return f'{self.servicio.nombre} - Prestado por: {self.prestador.rol_usuario.usuario.nombre} {self.prestador.rol_usuario.usuario.apellido} en {self.localidad}'
