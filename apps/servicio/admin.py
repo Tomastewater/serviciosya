@@ -16,6 +16,6 @@ class ServicioAdmin(admin.ModelAdmin):
 from apps.servicio.models import ServicioPrestado
 @admin.register(ServicioPrestado)
 class ServicioPrestadoAdmin(admin.ModelAdmin):
-    list_display = ["prestador", "servicio", "localidad"]
-    search_fields = ["localidad__nombre"]
-    list_filter = ["servicio"]
+    list_display = ["prestador", "categoria", "localidad", "precio", "descripcion"]
+    search_fields = ["localidad__nombre", "categoria__nombre"]
+    list_filter = ["categoria", "localidad"]
