@@ -1,0 +1,44 @@
+{% extends 'index_prestador.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title fs-6 font-semibold">Servicios ofrecidos</h5>
+
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr class="border-bottom border-primary">
+              <th scope="col">Categoría</th>
+              <th scope="col">Localidad</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for servicio in servicios %}
+            <tr>
+              <td>{{ servicio.categoria.nombre }}</td>
+              <td>{{ servicio.localidad.nombre }}</td>
+              <td>${{ servicio.precio }}</td>
+              <td>{{ servicio.descripcion }}</td>
+              <td>
+                <a href="{% url 'editar_servicio' servicio.id %}" class="btn btn-warning btn-sm me-2">Modificar</a>
+                <a href="{% url 'eliminar_servicio' servicio.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5">No cargaste servicios todavía.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
