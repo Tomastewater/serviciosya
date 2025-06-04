@@ -58,7 +58,7 @@ class CustomLoginView(generic.View):
             return render(request, 'registration/login.html', {'form': form})
 
 class servicesView(generic.TemplateView):
-    template_name = 'services.html'
+    template_name = 'lista_de_servicios.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -73,38 +73,36 @@ class servicesView(generic.TemplateView):
         return context
     
 class ServiciosListView(generic.ListView):
-    model = Servicio
-    template_name = 'services.html'
+    model = ServicioPrestado
+    template_name = 'lista_de_servicios.html'
     context_object_name = 'servicios'
-    ordering = ['nombre']
+    
+    def get_queryset(self):
+        queryset = ServicioPrestado.objects.select_related('prestador', 'categoria', 'localidad')
+        query = self.request.GET.get('q', '')
+        categoria_id = self.request.GET.get('categoria')
+
+        if categoria_id:
+            queryset = queryset.filter(categoria_id=categoria_id)
+
+        if query:
+            queryset = queryset.filter(
+                descripcion__icontains=query
+            )
+
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        query = self.request.GET.get('q', '')
-        categoria_id = self.request.GET.get('categoria', None)
-
-        servicios = Servicio.objects.all()
-
-        if categoria_id:
-            servicios = servicios.filter(categoria_id=categoria_id)
-
-        if query:
-            servicios = servicios.filter(
-                Q(nombre__icontains=query) | Q(descripcion__icontains=query)
-            )
-
-        context['servicios'] = servicios
         context['categorias'] = Categoria.objects.all()
-        context['query'] = query
-        context['categoria_id'] = categoria_id
-
+        context['query'] = self.request.GET.get('q', '')
+        context['categoria_id'] = self.request.GET.get('categoria', '')
         return context
 
 class ServicioDetailView(generic.DetailView):
     template_name = 'servicio_detail.html'
     model = Servicio
-    context_object_name = 'servicio'
+    context_object_name = 'servicioPrestado'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
