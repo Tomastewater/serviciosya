@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login
 from django.db.models import Q
 from .form import UsuarioForm
 from apps.servicio.models import Servicio, Categoria, ServicioPrestado
+from apps.ubicacion.models import Localidad
+
 
 class usuarioFormView(generic.FormView):
     template_name = 'formRegistrarse.html'
@@ -79,25 +81,26 @@ class ServiciosListView(generic.ListView):
     
     def get_queryset(self):
         queryset = ServicioPrestado.objects.select_related('prestador', 'categoria', 'localidad')
-        query = self.request.GET.get('q', '')
         categoria_id = self.request.GET.get('categoria')
+        localidad_id = self.request.GET.get('localidad')
 
         if categoria_id:
             queryset = queryset.filter(categoria_id=categoria_id)
 
-        if query:
-            queryset = queryset.filter(
-                descripcion__icontains=query
-            )
+        if localidad_id:
+            queryset = queryset.filter(localidad_id=localidad_id)
 
         return queryset
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categorias'] = Categoria.objects.all()
-        context['query'] = self.request.GET.get('q', '')
+        context['localidades'] = Localidad.objects.all()
         context['categoria_id'] = self.request.GET.get('categoria', '')
+        context['localidad_id'] = self.request.GET.get('localidad', '')
         return context
+
 
 class ServicioDetailView(generic.DetailView):
     template_name = 'servicio_detail.html'

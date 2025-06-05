@@ -35,7 +35,14 @@
       <form method="get" class="mb-4">
         <div class="row">
           <div class="col-md-6">
-            <input type="text" name="q" class="form-control" placeholder="Buscar servicios..." value="{{ query }}">
+            <select name="localidad" class="form-control">
+              <option value="">Todas las localidades</option>
+                {% for localidad in localidades %}
+                  <option value="{{ localidad.id }}" {% if localidad.id|stringformat:"s" == localidad_id %}selected{% endif %}>
+                    {{ localidad.nombre }}
+                  </option>
+                {% endfor %}
+            </select>
           </div>
           <div class="col-md-4">
             <select name="categoria" class="form-control">
