@@ -16,10 +16,19 @@
     <div class="container mt-5">
       <h1 class="text-center">Listado de Servicios</h1>
       <div class="mb-3">
-        <a href="{% url 'consumidor' %}" class="btn btn-secondary">
-          <iconify-icon icon="material-symbols:arrow-back-rounded" class="fs-6"></iconify-icon>
-          Volver 
-        </a>
+        <!-- si el usuario es logeado vuelve al panel de usuario-->
+        {% if user.is_authenticated %} 
+          <a href="{% url 'consumidor' %}" class="btn btn-secondary">
+            <iconify-icon icon="material-symbols:arrow-back-rounded" class="fs-6"></iconify-icon>
+            Volver 
+          </a>
+        <!--si no esta logueado vuelve al home -->
+        {% else %}
+          <a href="{% url 'home' %}" class="btn btn-secondary">
+           <iconify-icon icon="material-symbols:arrow-back-rounded" class="fs-6"></iconify-icon>
+            Volver
+          </a>
+        {% endif %}
       </div>
 
       <!-- Formulario de filtros -->
