@@ -9,6 +9,7 @@ from django.db.models import Q
 from .form import UsuarioForm
 from apps.servicio.models import Servicio, Categoria, ServicioPrestado
 from apps.ubicacion.models import Localidad
+from django.views.generic import TemplateView
 
 class usuarioFormView(generic.FormView):
     """
@@ -158,3 +159,9 @@ class ServicioDetailView(generic.DetailView):
             'prestador', 'localidad', 'servicio'
         ).filter(servicio=self.object)
         return context
+
+class MantenimientoView(TemplateView):
+    """
+    Vista para mostrar la página de mantenimiento.
+    """
+    template_name = 'mantenimiento.html'
