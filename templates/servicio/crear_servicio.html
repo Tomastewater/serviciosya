@@ -1,0 +1,13 @@
+{% extends 'index_prestador.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h3>Nuevo Servicio Prestado</h3>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+{% endblock %}

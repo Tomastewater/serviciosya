@@ -15,12 +15,34 @@
     data-sidebar-position="fixed" data-header-position="fixed">
     <div class="container mt-5">
       <h1 class="text-center">Listado de Servicios</h1>
+      <div class="mb-3">
+        <!-- si el usuario es logeado vuelve al panel de usuario-->
+        {% if user.is_authenticated %} 
+          <a href="{% url 'consumidor' %}" class="btn btn-secondary">
+            <iconify-icon icon="material-symbols:arrow-back-rounded" class="fs-6"></iconify-icon>
+            Volver 
+          </a>
+        <!--si no esta logueado vuelve al home -->
+        {% else %}
+          <a href="{% url 'home' %}" class="btn btn-secondary">
+           <iconify-icon icon="material-symbols:arrow-back-rounded" class="fs-6"></iconify-icon>
+            Volver
+          </a>
+        {% endif %}
+      </div>
 
       <!-- Formulario de filtros -->
       <form method="get" class="mb-4">
         <div class="row">
           <div class="col-md-6">
-            <input type="text" name="q" class="form-control" placeholder="Buscar servicios..." value="{{ query }}">
+            <select name="localidad" class="form-control">
+              <option value="">Todas las localidades</option>
+                {% for localidad in localidades %}
+                  <option value="{{ localidad.id }}" {% if localidad.id|stringformat:"s" == localidad_id %}selected{% endif %}>
+                    {{ localidad.nombre }}
+                  </option>
+                {% endfor %}
+            </select>
           </div>
           <div class="col-md-4">
             <select name="categoria" class="form-control">
@@ -43,19 +65,24 @@
         {% for servicio in servicios %}
           <div class="col-md-4">
             <div class="card mb-3">
+              {% if servicio.imagen %}
+                <img src="{{ servicio.imagen.url }}" class="card-img-top" alt="Imagen del servicio">
+              {% endif %}
               <div class="card-body">
-                <!-- Enlace al detalle del servicio -->
-                <a href="{% url 'servicio_detail' servicio.pk %}" class="stretched-link">
-                  <h5 class="card-title">{{ servicio.nombre }}</h5>
-                </a>
-                <p class="card-text">{{ servicio.descripcion|default:"Sin descripción disponible" }}</p>
-                <p class="card-text"><small class="text-muted">Categoría: {{ servicio.categoria.nombre }}</small></p>
+                <h5 class="card-title">{{ servicio.categoria.nombre }}</h5>
+                <p class="card-text">{{ servicio.descripcion|default:"Sin descripción" }}</p>
+                <p class="card-text">
+                  <small class="text-muted">
+                    Precio: ${{ servicio.precio }}<br>
+                    Localidad: {{ servicio.localidad }}
+                  </small>
+                </p>
               </div>
             </div>
           </div>
         {% empty %}
-          <div class="col-12">
-            <p class="text-center">No se encontraron servicios.</p>
+          <div class="col-12 text-center">
+            <p>No se encontraron servicios.</p>
           </div>
         {% endfor %}
       </div>

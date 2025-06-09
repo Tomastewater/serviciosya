@@ -4,6 +4,7 @@ from django.urls import path
 from apps.prestador.views import PrestadorPanelView, PrestadorDireccionListView, PrestadorDatosView, PrestadorContratosListView, PrestadorFacturasListView, CalificacionesListView
 from apps.consumidor.views import ConsumidorPanelView, ConsumidorDireccionListView, ConsumidorDatosView, ConsumidorContratosListView, ConsumidorPagosListView, ModificarDireccionView, EliminarDireccionView
 from apps.ubicacion.views import PrestadorEliminarDireccionView, PrestadorModificarDireccionView
+from apps.servicio.views import crear_servicio, ServiciosPrestadosListView, ServicioPrestadoUpdateView, ServicioPrestadoDeleteView
 
 urlpatterns = [
 
@@ -29,5 +30,9 @@ urlpatterns = [
     path('consumidor/pagos/', ConsumidorPagosListView.as_view(), name='pagos'),
     path('consumidor/modificar_direccion/<int:direccion_id>/', ModificarDireccionView.as_view(), name='modificar_direccion'),
     path('consumidor/eliminar_direccion/<int:direccion_id>/', EliminarDireccionView.as_view(), name='eliminar_direccion'),
+    path('prestador/servicio/nuevo/', crear_servicio, name='crear_servicio'),
+    path('prestador/servicios/', ServiciosPrestadosListView.as_view(), name='servicios_prestados'),
+    path('prestador/servicio/<int:pk>/editar/', ServicioPrestadoUpdateView.as_view(), name='editar_servicio'),
+    path('prestador/servicio/<int:pk>/eliminar/', ServicioPrestadoDeleteView.as_view(), name='eliminar_servicio'),
 
 ]
