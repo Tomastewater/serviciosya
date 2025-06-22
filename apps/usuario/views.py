@@ -9,33 +9,59 @@ from django.db.models import Q
 from .form import UsuarioForm
 from apps.servicio.models import Servicio, Categoria, ServicioPrestado
 from apps.ubicacion.models import Localidad
-
+from django.views.generic import TemplateView
 
 class usuarioFormView(generic.FormView):
+    """
+    Vista para el registro de nuevos usuarios mediante un formulario.
+    """
     template_name = 'formRegistrarse.html'
     form_class = UsuarioForm
     success_url = reverse_lazy('login')
 
     def form_valid(self, form):
+        """
+        Guarda el usuario si el formulario es válido.
+        """
         form.save()
         return super().form_valid(form)
     
 class registerView(generic.TemplateView):
+    """
+    Vista para mostrar la página de registro.
+    """
     template_name = 'register.html'
 
 class homeView(generic.TemplateView):
+    """
+    Vista para mostrar la página de inicio.
+    """
     template_name = 'home.html'
 
 class aboutView(generic.TemplateView):
+    """
+    Vista para mostrar la página 'Acerca de'.
+    """
     template_name = 'about.html'
 
 class CustomLoginView(generic.View):
+    """
+    Vista personalizada para el inicio de sesión de usuarios.
+    Permite autenticar y redirigir según el rol del usuario.
+    """
 
     def get(self, request, *args, **kwargs):
+        """
+        Muestra el formulario de inicio de sesión.
+        """
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
+        """
+        Procesa el formulario de inicio de sesión.
+        Si las credenciales son válidas, autentica y redirige según el rol.
+        """
         form = AuthenticationForm(request, data=request.POST)
         
         if form.is_valid():
@@ -60,9 +86,15 @@ class CustomLoginView(generic.View):
             return render(request, 'registration/login.html', {'form': form})
 
 class servicesView(generic.TemplateView):
+    """
+    Vista para mostrar la lista de servicios filtrados por categoría.
+    """
     template_name = 'lista_de_servicios.html'
 
     def get_context_data(self, **kwargs):
+        """
+        Agrega las categorías y servicios filtrados al contexto.
+        """
         context = super().get_context_data(**kwargs)
         
         context['categorias'] = Categoria.objects.all()
@@ -75,11 +107,17 @@ class servicesView(generic.TemplateView):
         return context
     
 class ServiciosListView(generic.ListView):
+    """
+    Vista para listar los servicios prestados, con filtros por categoría y localidad.
+    """
     model = ServicioPrestado
     template_name = 'lista_de_servicios.html'
     context_object_name = 'servicios'
     
     def get_queryset(self):
+        """
+        Filtra los servicios prestados por categoría y localidad si se especifican.
+        """
         queryset = ServicioPrestado.objects.select_related('prestador', 'categoria', 'localidad')
         categoria_id = self.request.GET.get('categoria')
         localidad_id = self.request.GET.get('localidad')
@@ -92,8 +130,10 @@ class ServiciosListView(generic.ListView):
 
         return queryset
 
-
     def get_context_data(self, **kwargs):
+        """
+        Agrega las categorías y localidades al contexto para los filtros.
+        """
         context = super().get_context_data(**kwargs)
         context['categorias'] = Categoria.objects.all()
         context['localidades'] = Localidad.objects.all()
@@ -101,17 +141,27 @@ class ServiciosListView(generic.ListView):
         context['localidad_id'] = self.request.GET.get('localidad', '')
         return context
 
-
 class ServicioDetailView(generic.DetailView):
+    """
+    Vista para mostrar el detalle de un servicio específico y sus prestadores asociados.
+    """
     template_name = 'servicio_detail.html'
     model = Servicio
     context_object_name = 'servicioPrestado'
 
     def get_context_data(self, **kwargs):
+        """
+        Agrega los prestadores relacionados con el servicio al contexto.
+        """
         context = super().get_context_data(**kwargs)
         # Obtén los servicios prestados relacionados con este servicio
         context['prestadores'] = ServicioPrestado.objects.select_related(
             'prestador', 'localidad', 'servicio'
         ).filter(servicio=self.object)
         return context
-        
+
+class MantenimientoView(TemplateView):
+    """
+    Vista para mostrar la página de mantenimiento.
+    """
+    template_name = 'mantenimiento.html'

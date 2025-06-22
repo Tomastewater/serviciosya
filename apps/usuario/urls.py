@@ -5,15 +5,19 @@ from apps.prestador.views import PrestadorPanelView, PrestadorDireccionListView,
 from apps.consumidor.views import ConsumidorPanelView, ConsumidorDireccionListView, ConsumidorDatosView, ConsumidorContratosListView, ConsumidorPagosListView, ModificarDireccionView, EliminarDireccionView
 from apps.ubicacion.views import PrestadorEliminarDireccionView, PrestadorModificarDireccionView
 from apps.servicio.views import crear_servicio, ServiciosPrestadosListView, ServicioPrestadoUpdateView, ServicioPrestadoDeleteView
+
 from apps.contrato.views import solicitar_servicio, solicitudes_prestador, aceptar_solicitud
 from apps.contrato.views import actualizar_estado_contrato
 
 from apps.contrato.views import todas_las_solicitudes
 
+from apps.usuario.views import MantenimientoView
+
 
 urlpatterns = [
 
     path('', homeView.as_view(), name='home'),
+    path('contact/', MantenimientoView.as_view(), name='contacto'),
     path('registrarse/', usuarioFormView.as_view(), name='register'),
     path('acercade/', aboutView.as_view(), name='about'),
     path('login/', CustomLoginView.as_view(), name='login'),

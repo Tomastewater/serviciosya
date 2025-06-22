@@ -5,11 +5,20 @@ from apps.consumidor.models import Consumidor
 from apps.prestador.models import Prestador
 
 class UsuarioForm(forms.ModelForm):
+    """
+    Formulario para registrar un nuevo usuario.
+
+    Permite ingresar nombre, apellido, email, contraseña y seleccionar el rol (Consumidor o Prestador).
+    Valida que el email no esté registrado y crea el modelo asociado según el rol.
+    """
     contraseña = forms.CharField(widget=forms.PasswordInput, required=True, label="Contraseña")
     eleccion = forms.ChoiceField(choices=Rol.ROLES, required=True)
     telefono = forms.CharField(max_length=20, required=False, label="Teléfono")
 
     class Meta:
+        """
+        Configuración del formulario asociada al modelo Usuario.
+        """
         model = Usuario
         fields = ['nombre', 'apellido', 'email', 'telefono', 'contraseña']
     
@@ -27,6 +36,15 @@ class UsuarioForm(forms.ModelForm):
         return email
 
     def save(self, commit=True):
+        """
+        Guarda el usuario, cifra la contraseña y crea el modelo asociado según el rol seleccionado.
+
+        Args:
+            commit (bool): Si True, guarda el usuario en la base de datos.
+
+        Returns:
+            Usuario: La instancia de usuario creada.
+        """
         usuario = super().save(commit=False)
         usuario.set_password(self.cleaned_data['contraseña'])  # Cifra la contraseña
         
