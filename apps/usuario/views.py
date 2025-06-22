@@ -85,26 +85,6 @@ class CustomLoginView(generic.View):
             messages.error(request, 'Error en las credenciales, por favor intenta nuevamente.')
             return render(request, 'registration/login.html', {'form': form})
 
-class servicesView(generic.TemplateView):
-    """
-    Vista para mostrar la lista de servicios filtrados por categoría.
-    """
-    template_name = 'lista_de_servicios.html'
-
-    def get_context_data(self, **kwargs):
-        """
-        Agrega las categorías y servicios filtrados al contexto.
-        """
-        context = super().get_context_data(**kwargs)
-        
-        context['categorias'] = Categoria.objects.all()
-        categoria_id = self.request.GET.get('categoria', None)
-
-        if categoria_id:
-            context['servicios'] = Servicio.objects.filter(categoria_id=categoria_id).order_by('nombre')
-        else:
-            context['servicios'] = Servicio.objects.order_by('nombre')
-        return context
     
 class ServiciosListView(generic.ListView):
     """
@@ -139,6 +119,13 @@ class ServiciosListView(generic.ListView):
         context['localidades'] = Localidad.objects.all()
         context['categoria_id'] = self.request.GET.get('categoria', '')
         context['localidad_id'] = self.request.GET.get('localidad', '')
+
+        if self.request.user.is_authenticated:
+            roles = self.request.user.roles.all()
+            context['rol'] = roles[0].rol if roles else None
+        else:
+            context['rol'] = None
+
         return context
 
 class ServicioDetailView(generic.DetailView):
