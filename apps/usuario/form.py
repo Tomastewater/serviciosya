@@ -13,13 +13,14 @@ class UsuarioForm(forms.ModelForm):
     """
     contraseña = forms.CharField(widget=forms.PasswordInput, required=True, label="Contraseña")
     eleccion = forms.ChoiceField(choices=Rol.ROLES, required=True)
-    
+    telefono = forms.CharField(max_length=20, required=False, label="Teléfono")
+
     class Meta:
         """
         Configuración del formulario asociada al modelo Usuario.
         """
         model = Usuario
-        fields = ['nombre', 'apellido', 'email', 'contraseña']
+        fields = ['nombre', 'apellido', 'email', 'telefono', 'contraseña']
     
     def clean_email(self):
         """

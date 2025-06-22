@@ -1,0 +1,29 @@
+{% extends 'index_consumidor.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class='row'>
+    <div class="col-lg-6 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fs-5 font-semibold mb-3">Solicitar servicio</h5>
+
+          <p><strong>Servicio:</strong> {{ servicio.categoria.nombre }}</p>
+          <p><strong>Prestador:</strong> {{ servicio.prestador.rol_usuario.usuario.nombre }} {{ servicio.prestador.rol_usuario.usuario.apellido }}</p>
+          <p><strong>Precio:</strong> AR$ {{ servicio.precio }}</p>
+
+          <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <button type="submit" class="btn btn-primary mt-3">Enviar solicitud</button>
+            <a href="{% url 'servicios' %}" class="btn btn-secondary mt-3">Cancelar</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

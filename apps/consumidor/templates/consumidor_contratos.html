@@ -12,25 +12,37 @@
               <table class="table text-nowrap align-middle mb-0">
                 <thead>
                   <tr class="border-2 border-bottom border-primary border-0"> 
-                    <th scope="col" class="text-center">Ver mas</th>
+                    <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="ps-4">Fecha del servicio</th>
                     <th scope="col" class="text-center">Servicio</th>
                     <th scope="col" class="text-center">Direccion</th>
                     <th scope="col" class="text-center">Precio</th>
+                    <th scope="col" class="text-center">Teléfono prestador</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                   {% for contrato in contratos %}
                     <tr>
                       <td class="text-center fw-medium">
-                        <button type="button" class="flex justify-center items-center text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full px-3 py-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                          <img src="{% static 'images/dash/logos/file-search.svg' %}" alt="Ícono" class="w-6 h-6">
-                        </button>
+                        {% if contrato.estado == 1 %}
+                          <span class="inline-block px-3 py-1 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full">En proceso</span>
+                        {% elif contrato.estado == 2 %}
+                          <span class="inline-block px-3 py-1 text-sm font-semibold text-red-800 bg-red-100 rounded-full">Cancelado</span>
+                        {% elif contrato.estado == 3 %}
+                          <span class="inline-block px-3 py-1 text-sm font-semibold text-green-800 bg-green-100 rounded-full">Completado</span>
+                        {% endif %}
                       </td>
                       <td class="text-center fw-medium">{{contrato.fecha_servicio}}</td>
                       <td class="text-center fw-medium">{{contrato.servicio_prestado.servicio.nombre}}</td>
                       <td class="text-center fw-medium">{{contrato.direccion.direccionCompleta}}</td>
                       <td class="text-center fw-medium">AR$ {{contrato.precio_acordado}}</td>
+                      <td class="text-center fw-medium">
+                        {% if contrato.estado == 1 %}
+                          {{ contrato.servicio_prestado.prestador.rol_usuario.usuario.telefono }}
+                        {% else %}
+                          <span class="text-muted">Sin contacto</span>
+                        {% endif %}
+                      </td>
                       {% comment %} <td>
                       <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/index.html</a>
                       </td> {% endcomment %}    

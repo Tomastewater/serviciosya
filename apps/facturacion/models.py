@@ -1,6 +1,7 @@
 from django.db import models
 
 class Factura(models.Model):
+  
     """
     Modelo que representa una factura emitida por un servicio.
 
@@ -10,6 +11,8 @@ class Factura(models.Model):
         monto_total (DecimalField): Monto total de la factura sin impuestos.
         detalles (TextField): Detalles adicionales de la factura (hasta 500 caracteres).
     """
+
+    prestador = models.ForeignKey("prestador.Prestador", on_delete=models.CASCADE)
     fecha_emision = models.DateField()
     impuestos = models.DecimalField(max_digits=15, decimal_places=2)
     monto_total = models.DecimalField(max_digits=15, decimal_places=2)

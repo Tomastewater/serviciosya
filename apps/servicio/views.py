@@ -4,6 +4,8 @@ from .models import ServicioPrestado
 from django.contrib import messages
 from apps.prestador.models import Prestador
 from apps.usuario.models import Rol
+from django.http import HttpResponseForbidden
+
 
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -20,10 +22,19 @@ def crear_servicio(request):
         form = ServicioPrestadoForm(request.POST, request.FILES)
         if form.is_valid():
             servicio_prestado = form.save(commit=False)
-            # Obtener el rol de prestador del usuario actual
-            rol_prestador = Rol.objects.get(usuario=request.user, rol=2)
-            # Obtener el objeto Prestador
-            prestador = Prestador.objects.get(rol_usuario=rol_prestador)
+
+            # Verificamos que el usuario tenga un Rol de prestador (rol=2)
+            rol_prestador = Rol.objects.filter(usuario=request.user, rol=2).first()
+            if not rol_prestador:
+                return HttpResponseForbidden("No se encontró un rol de prestador para este usuario.")
+             
+             # Buscamos el objeto Prestador correspondiente al rol
+            try:
+                prestador = Prestador.objects.get(rol_usuario=rol_prestador)
+            except Prestador.DoesNotExist:
+                messages.error(request, "No se encontró un objeto Prestador asociado a este rol.")
+                return redirect('prestador')
+                
             servicio_prestado.prestador = prestador
             servicio_prestado.save()
             messages.success(request, "El servicio fue creado con éxito.")
