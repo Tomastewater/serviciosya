@@ -8,6 +8,7 @@ class Usuario(AbstractUser):
     apellido = models.CharField(max_length=150, verbose_name="Apellido")
     email = models.EmailField(unique=True, verbose_name="Correo electrónico")
     fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
+    telefono = models.CharField(max_length=20, null=True, blank=True, verbose_name="Teléfono")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'nombre', 'apellido']

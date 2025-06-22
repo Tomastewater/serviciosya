@@ -1,6 +1,7 @@
 from django.db import models
 
 class Factura(models.Model):
+    prestador = models.ForeignKey("prestador.Prestador", on_delete=models.CASCADE)
     fecha_emision = models.DateField()
     impuestos = models.DecimalField(max_digits=15, decimal_places=2)
     monto_total = models.DecimalField(max_digits=15, decimal_places=2)

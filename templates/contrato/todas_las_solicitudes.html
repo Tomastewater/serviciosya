@@ -1,0 +1,20 @@
+{% extends 'index_prestador.html' %}
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="mb-4">Todas las solicitudes (sin filtro)</h2>
+    <p>Total: {{ solicitudes|length }}</p>
+
+    {% for s in solicitudes %}
+      <div class="card mb-3 p-3">
+        <p><strong>ID:</strong> {{ s.id }}</p>
+        <p><strong>Servicio:</strong> {{ s.servicio_prestado }}</p>
+        <p><strong>Prestador:</strong> {{ s.servicio_prestado.prestador }}</p>
+        <p><strong>Consumidor:</strong> {{ s.consumidor }}</p>
+        <p><strong>Fecha solicitada:</strong> {{ s.fecha_solicitada }}</p>
+        <p><strong>Estado:</strong> {{ s.get_estado_display }}</p>
+      </div>
+    {% empty %}
+      <p>No hay solicitudes registradas.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -20,3 +20,20 @@ class Contrato(models.Model):
     def __str__(self) -> str:
 
         return f"Contrato #{self.id} | Fecha: {self.fecha_contrato.strftime('%d/%m/%Y %H:%M')} | {self.servicio_prestado.servicio.nombre} | Dirección {self.direccion.calle} {self.direccion.altura} | Precio: ${self.precio_acordado} | Estado: {self.estado}"
+
+class SolicitudServicio(models.Model):
+    ESTADO_SOLICITUD = [
+        (1, 'Pendiente'),
+        (2, 'Aceptada'),
+        (3, 'Rechazada'),
+    ]
+
+    consumidor = models.ForeignKey("consumidor.Consumidor", on_delete=models.CASCADE)
+    servicio_prestado = models.ForeignKey("servicio.ServicioPrestado", on_delete=models.CASCADE)
+    direccion = models.ForeignKey("ubicacion.Direccion", on_delete=models.CASCADE)
+    fecha_solicitada = models.DateTimeField()
+    estado = models.IntegerField(choices=ESTADO_SOLICITUD, default=1)
+    fecha_solicitud = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Solicitud #{self.id} - {self.servicio_prestado} - {self.get_estado_display()}"

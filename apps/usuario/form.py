@@ -7,10 +7,11 @@ from apps.prestador.models import Prestador
 class UsuarioForm(forms.ModelForm):
     contraseña = forms.CharField(widget=forms.PasswordInput, required=True, label="Contraseña")
     eleccion = forms.ChoiceField(choices=Rol.ROLES, required=True)
-    
+    telefono = forms.CharField(max_length=20, required=False, label="Teléfono")
+
     class Meta:
         model = Usuario
-        fields = ['nombre', 'apellido', 'email', 'contraseña']
+        fields = ['nombre', 'apellido', 'email', 'telefono', 'contraseña']
     
     def clean_email(self):
         """

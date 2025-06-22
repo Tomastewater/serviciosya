@@ -1,0 +1,36 @@
+{% extends 'index_prestador.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">Actualizar estado del contrato</h5>
+
+          <p><strong>Servicio:</strong> {{ contrato.servicio_prestado.servicio.nombre }}</p>
+          <p><strong>Dirección:</strong> {{ contrato.direccion }}</p>
+          <p><strong>Fecha de servicio:</strong> {{ contrato.fecha_servicio }}</p>
+          <p><strong>Estado actual:</strong> {{ contrato.get_estado_display }}</p>
+
+          <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="estado">Nuevo estado:</label>
+              <select name="estado" id="estado" class="form-control">
+                {% for valor, nombre in opciones_estado %}
+                  <option value="{{ valor }}" {% if valor == contrato.estado %}selected{% endif %}>{{ nombre }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Actualizar</button>
+            <a href="{% url 'contratos_prestador' %}" class="btn btn-secondary mt-3">Cancelar</a>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
